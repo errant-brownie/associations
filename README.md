@@ -47,6 +47,25 @@ bower install
 
 View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
 
+### User stories
+https://docs.google.com/document/d/11-05TqYe62ruhc9XW3XzKwlEU2VWoP8KG1yi-4JDMnI/edit?usp=sharing
+
+### REST API
+
+Use passport and custom passport strategy for User creation and authentication
+
+GET /api/items
+gets the items the user likes
+
+POST /api/items
+adds items the user likes
+
+GET /api/associations
+gets the top items a user might like
+
+POST /api/associations
+custom association query
+
 
 ## Contributing
 
