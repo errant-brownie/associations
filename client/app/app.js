@@ -21,7 +21,7 @@ angular.module('associations', [
     })
     .when('/home', {
       templateUrl: '/app/home/home.html',
-      controller: 'DashboardController',
+      controller: 'HomeController',
       authenticate: true
     })
     .when('/history', {
