@@ -1,8 +1,12 @@
+//// App module
+//
 angular.module('associations', [
   'associations.dashboard',
   'associations.history',
+  'associations.auth,'
   'ngRoute'
 ])
+//// Front-end routes
 .config(function ($routeProvider, $httpProvider) {
   $routeProvider
     .when('/signin', {
