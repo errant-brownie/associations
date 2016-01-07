@@ -1,6 +1,8 @@
-# Project Name
+# Free Association
 
-> Pithy project description
+What do you like?
+What do other people like?
+What might you like that other people, who like the things you like, like?
 
 ## Team
 
@@ -48,6 +50,7 @@ bower install
 View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
 
 ### User stories
+
 https://docs.google.com/document/d/11-05TqYe62ruhc9XW3XzKwlEU2VWoP8KG1yi-4JDMnI/edit?usp=sharing
 
 ### REST API
