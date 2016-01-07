@@ -4,9 +4,9 @@
 
 ## Team
 
-  - __Product Owner__: teamMember
-  - __Scrum Master__: teamMember
-  - __Development Team Members__: teamMember, teamMember
+  - __Product Owner__: Julian Panopio
+  - __Scrum Master__: Alex Wu
+  - __Development Team Members__: Max Cudich, Wayne Chaw, Julian Panopio, Alex Wu
 
 ## Table of Contents
 
@@ -21,6 +21,8 @@
 ## Usage
 
 > Some usage instructions
+
+Allow users to find things other similar people also like
 
 ## Requirements
 
