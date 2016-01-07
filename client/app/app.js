@@ -1,7 +1,7 @@
 //// App module
 //
 angular.module('associations', [
-  'associations.dashboard',
+  'associations.home',
   'associations.history',
   'associations.auth,'
   'ngRoute'
@@ -19,9 +19,9 @@ angular.module('associations', [
       controller: 'AuthController',
       authenticate: false
     })
-    .when('/dashboard', {
-      templateUrl: '/app/dashboard/dashboard.html',
-      controller: 'DashboardController',
+    .when('/home', {
+      templateUrl: '/app/home/home.html',
+      controller: 'HomeController',
       authenticate: true
     })
     .when('/history', {
