@@ -20,6 +20,8 @@
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.14.2",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
     "sequelize": "^3.17.1"
   }
 }
