@@ -33,11 +33,11 @@ Once the project moves into development, the press release can be used as a touc
 ## Summary ##
   > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
 
-  Associations is an application that allows you to choose a variety of topics you are interested in or passionate about.
-  You can then add items related to that topic that you are especially interested in. For example, foodies would add 
-  Ramen Dojo to their "Food" topic. Our application would then look up users also interested in Ramen Dojo to see if they
-  like any other type of food that hasn't been added to your profile yet. Associations will then recommend that you try 
-  this new type of food. Associations aims to enrich your life by helping you make new discoveries more quickly. 
+  Associations is an application that allows you to choose a variety of things you are interested in or passionate about.
+  You can then add them to your profile. For example, foodies would add Ramen Dojo to their list. Our application would then 
+  look up users also interested in Ramen Dojo to see if they like any other related items that haven't been added to your 
+  profile yet. Associations will then recommend that you try these related items. Associations aims to enrich your life by 
+  helping you make new discoveries more quickly. 
 
 
 ## Problem ##
@@ -63,8 +63,7 @@ Once the project moves into development, the press release can be used as a touc
 ## How to Get Started ##
   > Describe how easy it is to get started.
 
-  All users need to do is create a profile, select topics they're interested in, and add specific items they think are
-  especially enjoyable.
+  All users have to do is log in and tell the application what their biggest interests are.
 
 
 ## Customer Quote ##
