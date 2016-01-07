@@ -9,8 +9,8 @@ var User = sequelize.define('User', {
 
 var ItemUser = sequelize.define('item_user', {
   id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
-  user_id: { type: Sequelize.INTEGER, references: { model: 'User', key: 'id' }},
-  item_id: { type: Sequelize.INTEGER, references: { model: 'Item', key: 'id' }}
+  user_id: { type: Sequelize.INTEGER },
+  item_id: { type: Sequelize.INTEGER }
 });
 
 var Item = sequelize.define('Item', {
@@ -20,8 +20,8 @@ var Item = sequelize.define('Item', {
 
 var CategoryItem = sequelize.define('category_item', {
   id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
-  item_id: { type: Sequelize.INTEGER, references: { model: 'Item', key: 'id'}},
-  category_id: { type: Sequelize.INTEGER, references: { model: 'Category', key: 'id' }}
+  item_id: { type: Sequelize.INTEGER },
+  category_id: { type: Sequelize.INTEGER }
 });
 
 var Category = sequelize.define('Category', {
@@ -43,3 +43,5 @@ module.exports = {
   Item: Item,
   init: init
 };
+
+init();
