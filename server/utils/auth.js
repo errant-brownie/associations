@@ -34,4 +34,4 @@ passport.deserializeUser(function(id, cb) {
   });
 });
 
-module.export = passport;
+module.exports = passport;
