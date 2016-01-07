@@ -15,10 +15,10 @@
 
 	<p>Enter New Interests...</p>
 
-	<form>
-	  <input type="text" name=""><br>
-	  <input type="text" name=""><br>
-	  <input type="text" name=""><br>
+	<form ng-submit="addInterests(data)">
+	  <input type="text" name="" ng-model="data[0]"><br>
+	  <input type="text" name="" ng-model="data[1]"><br>
+	  <input type="text" name="" ng-model="data[2]"><br>
 	  <input type="submit" value="Submit">
 	</form>
 </body>

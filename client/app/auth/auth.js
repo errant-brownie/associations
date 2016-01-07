@@ -4,5 +4,23 @@
 angular.module('associations.auth', [])
 
 .controller('AuthController', function($scope, $window, $location, Auth) {
-  $scope.user ={};
+  $scope.user = {};
+
+  // Uses Auth factory's functions, passing in a user object
+  // with properties 'username' and 'password'
+  $scope.signin = function() {
+    Auth.signin($scope.user)
+      .then(function(){})
+      .catch(function(error) {
+        console.log('Error at signin: ', error);
+      });
+  };
+
+  $scope.signup = function() {
+    Auth.signup($scope.user)
+      .then(function(){})
+      .catch(function(error) {
+        console.log('Error at signup: ', error);
+      });
+  };
 });
