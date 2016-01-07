@@ -26,11 +26,10 @@ Allow users to find things other similar people also like
 
 ## Requirements
 
-- Node 0.10.x
-- Redis 2.6.x
-- Postgresql 9.1.x
-- etc
-- etc
+- Node
+- Sequalize
+- Postgresql
+- Angular
 
 ## Development
 
