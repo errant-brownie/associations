@@ -2,10 +2,10 @@
   "name": "free-association",
   "description": "Association engine",
   "main": "app.js",
-  "scripts" : {
-    "postinstall" : "bower install",
-    "start" : "node server/app.js",
-    "dev" : "nodemon --debug server/app.js"
+  "scripts": {
+    "postinstall": "bower install",
+    "start": "node server/app.js",
+    "dev": "nodemon --debug server/app.js"
   },
   "authors": [
     "errant-brownie"
@@ -25,5 +25,9 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "angular": "~1.4.8",
+    "angular-route": "~1.4.8"
+  }
 }
