@@ -4,15 +4,15 @@
 //
 angular.module('associations.home', [])
 
-.controller('HomeController', function ($scope, Interests) {
+.controller('HomeController', function ($scope, Items) {
   $scope.data = [];
 
-  $scope.addInterests = function(interests) {
-    for(var i = 0; i < interests.length; i++) {
-      Interests.addInterest(interests[i])
+  $scope.addItems = function(items) {
+    for(var i = 0; i < items.length; i++) {
+      Items.addItem(items[i])
         .then(function(resp){})
         .catch(function(error) {
-          console.log('Error at addInterests: ', error);
+          console.log('Error at addItems: ', error);
         });
     }
   };
