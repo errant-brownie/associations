@@ -2,10 +2,10 @@
 <head>
 	<title>Associations</title>
 	<link rel="stylesheet" type="text/css" href="../../styles/style.css">
+	<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
 </head>
 <body>
 	<h1>Associations</h1>
-	<p>Find new interests</p>
 
 	<ul class="nav">
 		<li><a>Home</a></li></a>
@@ -13,13 +13,14 @@
 		<li><a>Log Out</a></li>
 	</ul>
 
-	<p>Enter New Interests...</p>
+	<p class="description">Enter new interests...</p>
 
-	<form ng-submit="addInterests(data)">
-	  <input type="text" name="" ng-model="data[0]"><br>
-	  <input type="text" name="" ng-model="data[1]"><br>
-	  <input type="text" name="" ng-model="data[2]"><br>
-	  <input type="submit" value="Submit">
+	<form>
+	  Interest 1: <input type="text" name=""><br>
+	  Interest 2: <input type="text" name=""><br>
+	  Interest 3: <input type="text" name=""><br>
+	  <button>Submit</button>
+
 	</form>
 </body>
 </html>

@@ -1,20 +1,69 @@
-h1{
-	text-align: center;
+body{
+	font-family: 'Montserrat', sans-serif;
+	background-image: url("http://i.imgur.com/CoygARX.png");
 }
 
+h1{
+	text-align: center;
+	margin-top: 5%;
+	font-size: 2.8em;
+}
 
 .nav{
     border:1px solid #ccc;
-    border-width:1px 0;
+    border-width:1px;
     list-style:none;
     margin:0;
     padding:0;
     text-align:center;
+    border-radius: 25px;
+    width: 50%;
+    margin: 0 auto;
+    background-color:white;
 }
 .nav li{
     display:inline;
 }
 .nav a{
     display:inline-block;
-    padding:10px;
+    padding:10px 25px;
+}
+
+.description{
+	font-size:1.5em;
+	text-align: center;
+	margin-top:5%;
+}
+
+form{
+	text-align: center;
+	font-size: 1.2em;
+}
+
+input[type=text]{
+        border: 1px solid #cdcdcd;
+        border-color: rgba(0,0,0,.14);
+        background-color: AliceBlue;
+        font-size: 15px;
+        margin:10px 0;
+        border-radius: 5px;
+}
+
+input[type=text]{
+        margin:10px auto;
+}
+
+button{
+    background-color: AliceBlue;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius:6px;
+    color: black;
+    font-family: 'Oswald';
+    font-size: 17px;
+    padding: 4px 9px;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid rgba(0,0,0,.14);
+    margin-top:15px;
 }
