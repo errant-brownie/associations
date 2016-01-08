@@ -70,7 +70,7 @@ var createUser = function(req, res, next){
   });
   dbController.addUser(user);
   next();
-},
+};
 
 module.exports = {
   passport: passport,
@@ -78,4 +78,4 @@ module.exports = {
   ensureLoggedIn: ensureAuth.ensureLoggedIn,
   ensureNotLoggedIn: ensureAuth.ensureNotLoggedIn,
   createUser: createUser,
-}
+};
