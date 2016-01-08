@@ -8,6 +8,7 @@ angular.module('associations.home', [])
   $scope.data = [];
 
   $scope.addItems = function(items) {
+    console.log(items);
     for(var i = 0; i < items.length; i++) {
       Items.addItem(items[i])
         .then(function(resp){})
