@@ -48,7 +48,7 @@ module.exports = function (app, express) {
   //   items: list of objects, each object will have a property "item"
   //     and "strength". "item" will link to an item object,
   //     "strength" will link to the item's association strength
-  app.get ('/api/associations', associationsController.getAssociations)
+  app.get('/api/associations', associationsController.getAssociations);
 
   // POST /api/associations custom association query
   // inputs:
@@ -66,5 +66,5 @@ module.exports = function (app, express) {
   //   items: list of objects, each object will have a property "item"
   //     and "strength". "item" will link to an item object,
   //     "strength" will link to the item's association strength
-  app.post('/api/associations', associationsController.postAssociations)
+  app.post('/api/associations', associationsController.postAssociations);
 };
