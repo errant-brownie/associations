@@ -66,5 +66,5 @@ module.exports = function (app, express) {
   //   items: list of objects, each object will have a property "item"
   //     and "strength". "item" will link to an item object,
   //     "strength" will link to the item's association strength
-  app.post('/api/associations', auth.ensuredLoggedIn, associationsController.postAssociations)
+  app.post('/api/associations', associationsController.postAssociations)
 };
