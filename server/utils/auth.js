@@ -5,7 +5,7 @@
 var passport = require("passport");
 var LocalStrategy = require("passport-local").Strategy;
 var ensureAuth= require("connect-ensure-login");
-var bcrypt = require("brcypt-node");
+var bcrypt = require("bcrypt-node");
 var Promise = require("bluebird");
 var dbController = require("../db/dbController.js");
 
@@ -74,7 +74,7 @@ var createUser = function(req, res, next){
 
 module.exports = {
   passport: passport,
-  authenticate: passport.authenticate('local', {failureFlash: true}}),
+  authenticate: passport.authenticate('local', {failureFlash: true}),
   ensureLoggedIn: ensureAuth.ensureLoggedIn,
   ensureNotLoggedIn: ensureAuth.ensureNotLoggedIn,
   createUser: createUser,
