@@ -4,12 +4,12 @@
 //
 angular.module('associations.services', [])
 
-.factory('Interests', function($http) {
-  var addInterest = function(interest) {
+.factory('Items', function($http) {
+  var addItem = function(item) {
     return $http({
       method: 'POST',
-      url: '/api/interests',
-      data: interest
+      url: '/api/items',
+      data: item
     })
     .then(function(resp) {}());
   };
