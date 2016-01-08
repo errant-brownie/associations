@@ -41,6 +41,8 @@ module.exports = {
   User: User,
   Category: Category,
   Item: Item,
+  ItemUser: ItemUser,
+  CategoryItem: CategoryItem,
   init: init
 };
 
