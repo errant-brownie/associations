@@ -10,8 +10,11 @@ angular.module('associations.home', [])
   $scope.addItems = function(items) {
     console.log(items);
     for(var i = 0; i < items.length; i++) {
-      Items.addItem(items[i])
-        .then(function(resp){})
+      var item = {name: items[i]};
+      Items.addItem(item)
+        .then(function(resp){
+          console.log('Successful addition! ', resp);
+        })
         .catch(function(error) {
           console.log('Error at addItems: ', error);
         });
