@@ -41,7 +41,7 @@ passport.deserializeUser(function(id, cb) {
 
 var createUser = function(req, res, next){
   next();
-}
+},
 
 module.exports = {
   passport: passport,
