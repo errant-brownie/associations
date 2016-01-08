@@ -1,5 +1,10 @@
+// This module combines a bunch of passport stuff into one super authentication
+// utility.
+
+
 var passport = require("passport");
-var LocalStrategy = require('passport-local').Strategy;
+var LocalStrategy = require("passport-local").Strategy;
+var ensureAuth= require("connect-ensure-login");
 
 passport.use(new LocalStrategy(
   function(username, password, done) {
@@ -34,4 +39,14 @@ passport.deserializeUser(function(id, cb) {
   });
 });
 
-module.exports = passport;
+var createUser = function(req, res, next){
+  next();
+}
+
+module.exports = {
+  passport: passport,
+  authenticate: passport.authenticate('local', {failureFlash: true}}),
+  ensureLoggedIn: ensureAuth.ensureLoggedIn,
+  ensureNotLoggedIn: ensureAuth.ensureNotLoggedIn,
+  createUser: createUser,
+}

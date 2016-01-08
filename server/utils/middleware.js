@@ -1,6 +1,6 @@
 //MiddleWare
 var bodyParser = require('body-parser');
-var passport = require('./auth');
+var auth = require('./auth'); // ./auth does some stuff to set up passport
 
 module.exports = function (app, express) {
   app.use(bodyParser.urlencoded({extended: true}));
@@ -13,8 +13,8 @@ module.exports = function (app, express) {
 
   // Initialize Passport and restore authentication state, if any, from the
   // session.
-  app.use(passport.initialize());
-  app.use(passport.session());
+  app.use(auth.passport.initialize());
+  app.use(auth.passport.session());
 
   app.use(express.static(__dirname + '/../../client'));
 };
