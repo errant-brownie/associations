@@ -15,7 +15,7 @@ angular.module('associations.services', [])
   };
 
   return {
-    addInterest: addInterest
+    addItem: addItem
   };
 })
 
