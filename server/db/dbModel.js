@@ -10,7 +10,8 @@ var User = sequelize.define('User', {
 var ItemUser = sequelize.define('item_user', {
   id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
   user_id: { type: Sequelize.INTEGER },
-  item_id: { type: Sequelize.INTEGER }
+  item_id: { type: Sequelize.INTEGER },
+  itemUser: {type: Sequelize.STRING, unique: true }
 });
 
 var Item = sequelize.define('Item', {
