@@ -1,6 +1,7 @@
 // Routes
 var auth = require('./auth'); // ./auth does some stuff to set up passport
-
+var itemsController = require('../controllers/itemsController');
+var associationsController = require('../controllers/associationsController');
 module.exports = function (app, express) {
   // put routes in here
 
@@ -12,8 +13,10 @@ module.exports = function (app, express) {
   // output:
   // in data field:
   //    message: if failure, reason for failure
-  app.post('/api/users/signin', auth.authenticate);
-  app.post('/api/users/signup', auth.createUser)
+  app.post('/api/users/signin', auth.authenticate, function(req, res) {
+    res.json({ message: "Authenticated" })
+  });
+  app.post('/api/users/signup', auth.ensureNotLoggedIn, auth.createUser)
 
   // GET /api/items gets the items the user likes
   // inputs: 
@@ -24,7 +27,7 @@ module.exports = function (app, express) {
   // outputs:
   // in data field:
   //   items: list of item objects that the user likes
-  app.get('/api/items', itemController.getAll);
+  app.get('/api/items', itemsController.getAll);
 
   // POST /api/items adds items the user likes
   // inputs: 
@@ -45,7 +48,7 @@ module.exports = function (app, express) {
   //   items: list of objects, each object will have a property "item"
   //     and "strength". "item" will link to an item object,
   //     "strength" will link to the item's association strength
-  app.get ('/api/associations', associationController.getAssociations)
+  app.get ('/api/associations', associationsController.getAssociations)
 
   // POST /api/associations custom association query
   // inputs:
