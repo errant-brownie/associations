@@ -15,7 +15,7 @@ var ItemUser = sequelize.define('item_user', {
 
 var Item = sequelize.define('Item', {
   id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
-  item: { type: Sequelize.STRING, unique: true }
+  name: { type: Sequelize.STRING, unique: true }
 });
 
 var CategoryItem = sequelize.define('category_item', {
@@ -26,7 +26,7 @@ var CategoryItem = sequelize.define('category_item', {
 
 var Category = sequelize.define('Category', {
   id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
-  category: { type: Sequelize.STRING, unique: true },
+  name: { type: Sequelize.STRING, unique: true },
 });
 
 var init = function() {
