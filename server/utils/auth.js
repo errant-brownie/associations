@@ -5,18 +5,33 @@
 var passport = require("passport");
 var LocalStrategy = require("passport-local").Strategy;
 var ensureAuth= require("connect-ensure-login");
+var bcrypt = require("brcypt-node");
+var Promise = require("bluebird");
+var dbController = require("../db/dbController.js");
 
 passport.use(new LocalStrategy(
   function(username, password, done) {
-    User.findOne({ username: username }, function(err, user) {
-      if (err) { return done(err); }
-      if (!user) {
-        return done(null, false, { message: 'Incorrect username.' });
+    dbController.getUser({username:username})
+    // found the user
+    .then(function (user){
+      return Promise.promisify(bcrypt.compare)(password, user.password)
+      .then(function(match){
+        if(match){
+          // valid password
+          return done(null, user);
+        } else {
+          // invalid password
+          return done(null, false, {message:"Incorrect password."});
+        }
+      });
+    })
+    // something happened
+    .catch(function(err){
+      if(err.message === "User does not exist"){
+        return(done(null, false, {message: "User not found."}));
+      } else {
+        return done(err);
       }
-      if (!user.validPassword(password)) {
-        return done(null, false, { message: 'Incorrect password.' });
-      }
-      return done(null, user);
     });
   }
 ));
@@ -39,7 +54,21 @@ passport.deserializeUser(function(id, cb) {
   });
 });
 
+// inputs:
+  // in data field:
+  //    user: 
+  //      username: the useraname
+  //      password: the password
+  // output:
+  // in data field:
+  //    message: if failure, reason for failure
 var createUser = function(req, res, next){
+  var user = req.body.user;
+  Promise.promisify(bcrypt.hash)(user.password)
+  .then(function(data){
+    user.password = data;
+  });
+  dbController.addUser(user);
   next();
 },
 
