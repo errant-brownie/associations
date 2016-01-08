@@ -9,6 +9,6 @@ module.exports = {
   },
 
   add: function(request, response, next){
-    respones.json(request.body);
+    response.json(request.body);
   }
 }
