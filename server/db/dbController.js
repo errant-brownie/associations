@@ -9,52 +9,34 @@ var getUser = function (user) {
         return match;
       }
     })
-    .catch(function (err) {
-      console.log(err);
-      throw err;
-    })
 };
 
-// var getAllUsers = function (req, res) {
-//   model.User.findAll()
-//     .then(function (users) {
-//       if (users.length === 0) {
-//         throw (new Error('No users exist in the database!'));
-//       } else {
-//         return users;
-//       }
-//     })
-// }
-
 var addUser = function (user) {
-  model.User.findOrCreate({ username: user.username, password: user.password })
-    .spread(function (user, created) {
-      if (!created) {
-        throw (new Error('Username already exists!'));
+  model.User.findOne({ where: { username: user.username } })
+    .then(function (match) {
+      if (match) {
+        throw (new Error('Username already exists'));
       } else {
         return user;
       }
     })
-    .catch(function (err) {
-      console.log(err);
-      throw err;
+    .then(function (newUser) {
+      return model.User.create({ username: newUser.username, password: newUser.password })
     })
 };
 
 var addItem = function (object) {
-  model.Item.findOrCreate({ name: object.itemName })
-    .spread(function (item, created) {
-      return model.ItemUser.create({
-        user_id: object.userID, 
-        item_id: item.id, 
-        itemUser: object.userID.toString() + item.id
-      })
+  // object will have the following format { item: { name: 'xyz' }, user: { id: 'INTEGER', name: 'abc' } }
+  model.Item.findOrCreate({ where: { name: object.itemName } })
+    .then(function (item) {
+      return model.ItemUser.findOrCreate({ where: { item_id: item.id, used_id: object.user } })
+    })
+    .then(function (newItem) {
+      return newItem;
     })
 };
 
 var getRelatedItems = function (itemList) {
-  // SELECT Item.name FROM Item WHERE Item.id
-  model.User.findAll({include: req.})
 
 };
 
@@ -71,5 +53,11 @@ var getAllCategories = function (req, res) {
 };
 
 module.exports = {
-
-}
+  getUser: getUser,
+  addUser: addUser,
+  addItem: addItem,
+  getRelatedItems: getRelatedItems,
+  addCategory: addCategory,
+  getCategory: getCategory,
+  getAllCategories: getAllCategories
+};

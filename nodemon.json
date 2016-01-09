@@ -1,0 +1,5 @@
+{
+  "events": {
+    "restart": "mysql -u root -ppassword -e 'drop database freeAssoc'\n mysql -u root -ppassword -e 'create database freeAssoc'\n mysql -u root -ppassword -e 'use freeAssoc'"
+  }
+}
