@@ -1,6 +1,6 @@
 //// Module for the user's home page
 //    -This is where the user views all new recommendations
-//    - Functions as their feed
+//    -Functions as their feed
 //
 angular.module('associations.home', [])
 

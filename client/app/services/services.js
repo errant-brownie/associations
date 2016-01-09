@@ -1,6 +1,9 @@
 //// Services for authentication and obtainin data
 //    -Functions for populating history and dashboard views
 //    -Sign in and sign out functions
+//    -Item adding functionality
+//
+//    **Need to finish authentication once back-end auth is done
 //
 angular.module('associations.services', [])
 
