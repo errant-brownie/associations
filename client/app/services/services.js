@@ -29,7 +29,9 @@ angular.module('associations.services', [])
       url: '/api/users/signin',
       data: user
     })
-    .then(function(){});
+    .then(function (response) {
+      return response.data.token;
+    });
   };
 
   var signup = function(user) {
@@ -38,7 +40,9 @@ angular.module('associations.services', [])
       url: '/api/users/signup',
       data: user
     })
-    .then(function(){});
+    .then(function (response) {
+      return response.data.token;
+    });
   };
 
   var signout = function() {};
