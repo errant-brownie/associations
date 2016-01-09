@@ -18,10 +18,10 @@ passport.use(new LocalStrategy(
       .then(function(match){
         if(match){
           // valid password
-          return done(null, user);
+          return done(null, user, {message: "Authorized"});
         } else {
           // invalid password
-          return done(null, false, {message:"Incorrect password."});
+          return done(null, false, {message: "Incorrect password."});
         }
       });
     })
@@ -68,8 +68,13 @@ var createUser = function(req, res, next){
   .then(function(data){
     user.password = data;
   });
-  dbController.addUser(user);
-  next();
+  dbController.addUser(user).
+  then(function (user) {
+    var data = {};
+    data.token = user.id
+    res.json(data);
+  }).
+  catch()
 };
 
 module.exports = {
