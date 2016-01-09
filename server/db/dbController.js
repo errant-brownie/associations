@@ -34,7 +34,7 @@ var addItem = function (object) {
 };
 
 var getRelatedItems = function (itemList) {
-
+  
 };
 
 var addCategory = function (req, res) {
