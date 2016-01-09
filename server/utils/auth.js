@@ -48,9 +48,13 @@ passport.serializeUser(function(user, cb) {
 });
 
 passport.deserializeUser(function(id, cb) {
-  db.users.findById(id, function (err, user) {
+  dbController.findUserById(id, function (err, user) {
     if (err) { return cb(err); }
-    cb(null, user);
+    var data = {
+      id: user.id;
+      username: user.username;
+    };
+    cb(null, data);
   });
 });
 
@@ -64,17 +68,21 @@ passport.deserializeUser(function(id, cb) {
   //    message: if failure, reason for failure
 var createUser = function(req, res, next){
   var user = req.body.user;
-  Promise.promisify(bcrypt.hash)(user.password)
-  .then(function(data){
+
+  // hashing is not done by the model, though it probably should
+  Promise.promisify(bcrypt.hash)(user.password,null,null)
+  .then(function (data) {
     user.password = data;
-  });
-  dbController.addUser(user).
-  then(function (user) {
+    return dbController.addUser(user);
+  })
+  .then(function (user) {
     var data = {};
-    data.token = user.id
+    data.token = user.id;
     res.json(data);
-  }).
-  catch()
+  })
+  .catch(function (error) {
+    res.json(error);
+  });
 };
 
 module.exports = {
