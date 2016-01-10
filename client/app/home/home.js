@@ -30,28 +30,22 @@ angular.module('associations.home', [])
       var rec = $scope.dummyData[i];
       var url = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=2fe873304c3096cb7755b84e7002f982&text='
        + rec.title + '&tag='+ rec.title + '&content_type=1&per_page=20&format=json&nojsoncallback=1';
+      
+      (function(arg){
+        $http({
+          method: 'GET',
+          url: url
+        }).then(function successCallback(response) {
+            var random = Math.floor(Math.random() * 10);
 
-       console.log(url);
-(function(arg){
-      $http({
-        method: 'GET',
-        url: url
-      }).then(function successCallback(response) {
-          var random = Math.floor(Math.random() * 10);
-          console.log(random);
-          var item = response.data.photos.photo[random];
-          var imgSrc = "http://farm"+ item.farm +".static.flickr.com/"+ item.server +"/"+ item.id +"_"+ item.secret +"_m.jpg";
-          console.log($scope.dummyData[arg]);
-          $scope.dummyData[arg].url = imgSrc;
-          console.log(imgSrc)
-          console.log($scope.dummyData[arg]);
+            var item = response.data.photos.photo[random];
+            var imgSrc = "http://farm"+ item.farm +".static.flickr.com/"+ item.server +"/"+ item.id +"_"+ item.secret +"_m.jpg";
 
-        }, function errorCallback(response) {
-          // called asynchronously if an error occurs
-          // or server returns response with an error status.
-          console.log("ERROR");
-        });
-})(i);
+            $scope.dummyData[arg].url = imgSrc;
+          }, function errorCallback(response) {
+            console.log("ERROR");
+          });
+      })(i);
 
     }
   }();

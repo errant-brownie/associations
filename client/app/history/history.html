@@ -1,5 +1,9 @@
-<h2>History</h2>
 
-<ul>
-  <li ng-repeat="item in items"></li>
-</ul>
+<div class="history-items">
+  <h2>History</h2>
+
+  <div class="history-container" ng-repeat="item in items">
+    <div class="item-image" style="background-image: url('{{ item.url }}')"></div>
+    <div class="item">{{ item.name }}</div>
+  </div>
+</div>
