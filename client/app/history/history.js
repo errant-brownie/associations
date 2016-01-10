@@ -3,6 +3,10 @@
 //
 angular.module('associations.history', [])
 
-.controller('HistoryController', function ($scope) {
-  $scope.data = {};
+.controller('HistoryController', function ($scope, History) {
+  $scope.items = {};
+
+  $scope.initialize = function() {
+
+  };
 });

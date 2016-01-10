@@ -54,4 +54,18 @@ angular.module('associations.services', [])
     signup: signup,
     signout: signout
   };
+})
+
+.factory('History', function($http) {
+  var getHistory = function() {
+    return $http({
+      method: 'GET',
+      url: '/api/items',
+    })
+    .then(function(){});
+  };
+
+  return {
+    getHistory: getHistory
+  };
 });
