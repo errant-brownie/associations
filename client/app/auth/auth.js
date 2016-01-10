@@ -10,7 +10,10 @@ angular.module('associations.auth', [])
   // with properties 'username' and 'password'
   $scope.signin = function() {
     Auth.signin($scope.user)
-      .then(function(){})
+      .then(function (token) {
+        $window.localStorage.setItem('com.associations.authenticated', token);
+        $location.path('/');
+      })
       .catch(function(error) {
         console.log('Error at signin: ', error);
       });
@@ -18,7 +21,10 @@ angular.module('associations.auth', [])
 
   $scope.signup = function() {
     Auth.signup($scope.user)
-      .then(function(){})
+      .then(function (token) {
+        $window.localStorage.setItem('com.associations.authenticated', token);
+        $location.path('/');
+      })
       .catch(function(error) {
         console.log('Error at signup: ', error);
       });

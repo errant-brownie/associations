@@ -1,20 +1,14 @@
 <h1>Associations</h1>
 <p> Discover new interests or hobbies! </p>
 
-<h2>Sign up</h2>
-<form action="/signup" method="post">
-    <div>
-      <label for="username">Username:</label>
-      <input id="username" type="text" name="username">
-    </div>
-    <div>
-      <label for="password">Password:</label>
-      <input id="password" type="password" name="password">
-    </div>
-    
-      <input type="submit" value="Sign up">
-    </div>
-</form>
-<p>
-  <a href="/login">Login to your account &rarr;</a>
-<p>
+<div id='signup'>
+  <h1>signup</h1>
+  <form name="signupForm" ng-submit='signup()'>
+    <label for="username">Username:</label>
+    <input type='text' id="username" ng-model='user.username'>
+    <label for="password">Password:</label>
+    <input type="password" id="password" ng-model='user.password'>
+    <button>signup</button>
+  </form>
+  <a href="#/signin">Already have an account? <strong>Signin</strong> ...</a>
+</div>

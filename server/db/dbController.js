@@ -1,7 +1,7 @@
 var model = require('./dbModel.js');
 
 var getUser = function (user) {
-  model.User.findOne({ where: { username: user.username }})
+  return model.User.findOne({ where: { username: user.username }})
     .then(function (match) {
       if (!match) {
         throw (new Error('User does not exist!'));
@@ -12,7 +12,7 @@ var getUser = function (user) {
 };
 
 var addUser = function (user) {
-  model.User.findOne({ where: { username: user.username } })
+  return model.User.findOne({ where: { username: user.username } })
     .then(function (match) {
       if (match) {
         throw (new Error('Username already exists'));
@@ -22,7 +22,7 @@ var addUser = function (user) {
     })
     .then(function (newUser) {
       return model.User.create({ username: newUser.username, password: newUser.password });
-    })
+    });
 };
 
 var addItem = function (object) {

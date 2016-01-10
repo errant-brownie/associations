@@ -37,6 +37,8 @@ var init = function() {
   sequelize.sync();
 };
 
+init();
+
 module.exports = {
   User: User,
   Category: Category,

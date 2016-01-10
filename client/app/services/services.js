@@ -29,16 +29,22 @@ angular.module('associations.services', [])
       url: '/api/users/signin',
       data: user
     })
-    .then(function(){});
+    .then(function (response) {
+      return response.data.message;
+    });
   };
 
   var signup = function(user) {
+    var data = {};
+    data.user = user;
     return $http({
       method: 'POST',
       url: '/api/users/signup',
-      data: user
+      data: data
     })
-    .then(function(){});
+    .then(function (response) {
+      return response.data.token;
+    });
   };
 
   var signout = function() {};
