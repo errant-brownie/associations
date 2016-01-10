@@ -1,33 +1,32 @@
 var Sequelize = require('sequelize');
-var sequelize = new Sequelize('freeAssoc', 'root', 'password');
+var sequelize = new Sequelize('freeAssoc', 'root', 'password', {dialect: 'mysql'});
 
 var User = sequelize.define('User', {
   id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
-  username: { type: Sequelize.STRING, unique: true },
-  password: { type: Sequelize.STRING }
+  username: { type: Sequelize.STRING, unique: true, notNull: true },
+  password: { type: Sequelize.STRING, notNull: true, unique: false }
 });
 
 var ItemUser = sequelize.define('item_user', {
   id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
-  user_id: { type: Sequelize.INTEGER },
-  item_id: { type: Sequelize.INTEGER },
-  itemUser: {type: Sequelize.STRING, unique: true }
+  user_id: { type: Sequelize.INTEGER, notNull: true },
+  item_id: { type: Sequelize.INTEGER, notNull: true },
 });
 
 var Item = sequelize.define('Item', {
   id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
-  name: { type: Sequelize.STRING, unique: true }
+  name: { type: Sequelize.STRING, unique: true , notNull: true}
 });
 
 var CategoryItem = sequelize.define('category_item', {
   id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
-  item_id: { type: Sequelize.INTEGER },
-  category_id: { type: Sequelize.INTEGER }
+  item_id: { type: Sequelize.INTEGER, notNull: true },
+  category_id: { type: Sequelize.INTEGER, notNull: true }
 });
 
 var Category = sequelize.define('Category', {
   id: { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
-  name: { type: Sequelize.STRING, unique: true },
+  name: { type: Sequelize.STRING, unique: true, notNull: true },
 });
 
 var init = function() {
@@ -47,4 +46,36 @@ module.exports = {
   init: init
 };
 
-init();
+// MISC DB TESTS
+
+// init();
+
+// userTest1 = {username: 'test1', password:'test1'};
+// itemTest1 = {name: 'shit sandwich'};
+
+// userTest2 = {username: 'bad mutha fucka', password: 'fo sho'};
+
+// setTimeout(function() {
+//   User.create(userTest1)
+//     .then(function() {
+//       User.find({where: {username: userTest1.username}})
+//         .then(function (user) {
+//           Item.create(itemTest1)
+//             .then(function(item) {
+//               ItemUser.create({ user_id: user.id, item_id: item.id, itemUser: item.name + user.username })
+//                 .then(function (itemUser) {
+//                 })
+//             })
+//         })
+//         .catch(function (err) {
+//           throw (new Error('No user found, what the fuck?!'));
+//         })
+//     })
+// }, 2500)
+
+// setTimeout(function() {
+//   Item.findOrCreate({where: {name: 'shit sandwich2'}})
+//     .then(function(item) {
+//       console.log(arguments)
+//     })
+// }, 5000)
