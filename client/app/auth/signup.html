@@ -4,14 +4,10 @@
 <div id='signup'>
   <h1>signup</h1>
   <form name="signupForm" ng-submit='signup()'>
-  <div>
     <label for="username">Username:</label>
     <input type='text' id="username" ng-model='user.username'>
-  </div>
-  <div>
     <label for="password">Password:</label>
     <input type="password" id="password" ng-model='user.password'>
-  </div>
     <button>signup</button>
   </form>
   <a href="#/signin">Already have an account? <strong>Signin</strong> ...</a>
