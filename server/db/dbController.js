@@ -21,7 +21,7 @@ var addUser = function (user) {
       }
     })
     .then(function (newUser) {
-      return model.User.create({ username: newUser.username, password: newUser.password })
+      return model.User.create({ username: newUser.username, password: newUser.password });
     })
 };
 
@@ -29,10 +29,7 @@ var addItem = function (object) {
   // object will have the following format { item: { name: 'xyz' }, user: { id: 'INTEGER', name: 'abc' } }
   model.Item.findOrCreate({ where: { name: object.itemName } })
     .then(function (item) {
-      return model.ItemUser.findOrCreate({ where: { item_id: item.id, used_id: object.user } })
-    })
-    .then(function (newItem) {
-      return newItem;
+      return model.ItemUser.findOrCreate({ where: { item_id: item.id, used_id: object.user } });
     })
 };
 
