@@ -13,21 +13,27 @@ passport.use(new LocalStrategy(
   function(username, password, done) {
     dbController.getUser({username:username})
     // found the user
-    .then(function (user){
+    .then(function (user) {
       return Promise.promisify(bcrypt.compare)(password, user.password)
-      .then(function(match){
-        if(match){
-          // valid password
-          return done(null, user, {message: "Authorized"});
-        } else {
-          // invalid password
-          return done(null, false, {message: "Incorrect password."});
+      .then(function (match) {
+        return {
+          match: match,
+          user: user,
         }
-      });
+      })
+    })
+    .then(function (data) {
+      if(data.match){
+        // valid password
+        return done(null, data.user, {message: data.user.id});
+      } else {
+        // invalid password
+        return done(null, false, {message: "Incorrect password."});
+      }
     })
     // something happened
     .catch(function(err){
-      if(err.message === "User does not exist"){
+      if(err.message == 'User does not exist!'){
         return(done(null, false, {message: "User not found."}));
       } else {
         return done(err);
@@ -44,15 +50,15 @@ passport.use(new LocalStrategy(
 // serializing, and querying the user record by ID from the database when
 // deserializing.
 passport.serializeUser(function(user, cb) {
-  cb(null, user.id);
+  cb(null, user.username);
 });
 
-passport.deserializeUser(function(id, cb) {
-  dbController.findUserById(id, function (err, user) {
+passport.deserializeUser(function(username, cb) {
+  dbController.getUser(username, function (err, user) {
     if (err) { return cb(err); }
     var data = {
-      id: user.id;
-      username: user.username;
+      id: user.id,
+      username: user.username,
     };
     cb(null, data);
   });
@@ -87,7 +93,7 @@ var createUser = function(req, res, next){
 
 module.exports = {
   passport: passport,
-  authenticate: passport.authenticate('local', {failureFlash: true}),
+  authenticate: passport.authenticate('local', {}),
   ensureLoggedIn: ensureAuth.ensureLoggedIn,
   ensureNotLoggedIn: ensureAuth.ensureNotLoggedIn,
   createUser: createUser,
