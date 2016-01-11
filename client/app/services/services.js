@@ -80,15 +80,22 @@ angular.module('associations.services', [])
       return response.data.token;
     });
   };
+  
+  var isAuth = function () {
+    return !!$window.localStorage.getItem('com.associations.authenticated');
+  };
 
   var signout = function() {};
 
   return {
     signin: signin,
     signup: signup,
-    signout: signout
+    signout: signout,
+    isAuth: isAuth
   };
 })
+
+
 
 .factory('History', function($http) {
 
