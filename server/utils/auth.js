@@ -10,7 +10,7 @@ var Promise = require("bluebird");
 var usersController = require("../controllers/usersController.js");
 
 passport.use(new LocalStrategy(
-  function(username, password, done) {
+  function (username, password, done) {
     usersController.getUser({username:username})
     // found the user
     .then(function (user) {
@@ -23,7 +23,7 @@ passport.use(new LocalStrategy(
       })
     })
     .then(function (data) {
-      if(data.match){
+      if (data.match) {
         // valid password
         return done(null, data.user, {message: data.user.id});
       } else {
@@ -32,8 +32,8 @@ passport.use(new LocalStrategy(
       }
     })
     // something happened
-    .catch(function(err){
-      if(err.message == 'User does not exist!'){
+    .catch(function (err){
+      if (err.message == 'User does not exist!') {
         return(done(null, false, {message: "User not found."}));
       } else {
         return done(err);
@@ -49,11 +49,11 @@ passport.use(new LocalStrategy(
 // typical implementation of this is as simple as supplying the user ID when
 // serializing, and querying the user record by ID from the database when
 // deserializing.
-passport.serializeUser(function(user, cb) {
+passport.serializeUser(function (user, cb) {
   cb(null, user.username);
 });
 
-passport.deserializeUser(function(username, cb) {
+passport.deserializeUser(function (username, cb) {
   usersController.getUser({username: username})
   .then (function (user) {
     var data = {
@@ -75,7 +75,7 @@ passport.deserializeUser(function(username, cb) {
   // output:
   // in data field:
   //    message: if failure, reason for failure
-var createUser = function(req, res, next){
+var createUser = function (req, res, next){
   var user = req.body.user;
 
   // hashing is not done by the model, though it probably should
