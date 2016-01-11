@@ -14,16 +14,14 @@
 <div class="result" ng-hide="formShow">
 	<h2>Recommendations</h2>
 
+	<div class="recContainer" ng-repeat="n in dummyData">
+		<div class="rec">{{n.title}}
+    <div style="clear:both"></div>
+    <div class="img" style="background-image: url('{{n.url}}')"></div>
+    </div>
+	</div>
+	<div style="clear:both"></div>
 
-
-		<div class="recContainer" ng-repeat="n in dummyData">
-			<div class="rec">{{n.title}}<div style="clear:both"></div><div class="img" style="background-image: url('{{n.url}}')"></div></div>
-
-		</div>
-		<div style="clear:both"></div>
-
-
-
-<button class="center" ng-click="formShow='true'">Back</button>
+  <button class="center" ng-click="formShow='true'">Back</button>
 
 </div>

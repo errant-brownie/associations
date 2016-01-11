@@ -108,3 +108,20 @@ button{
     border: 1px solid rgba(0,0,0,.14);
     margin-top:15px;
 }
+
+.edit-history {
+    margin-bottom: 15px;
+}
+
+.history-items {
+    text-align: center;
+}
+
+.history-container {
+    text-align: center;
+}
+
+.delete-item {
+    margin-top: 5px;
+    margin-bottom: 15px;
+}

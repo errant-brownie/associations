@@ -1,0 +1,18 @@
+
+<div class="history-items">
+
+  <h2>History</h2>
+
+  <button class="edit-history" ng-click="editing = !editing">Edit History</button>
+
+  <div class="history-container" ng-repeat="item in items track by $index">
+    <!-- <div class="item-image" style="background-image: url('{{ item.url }}')"><div style="clear:both"></div> -->
+    <div class="item">{{ item.name }}</div>
+
+    <button class="delete-item" ng-hide="!editing" 
+      ng-click="removeItem($index)">
+      Delete
+    </button>
+
+  </div>
+</div>

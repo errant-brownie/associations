@@ -54,4 +54,32 @@ angular.module('associations.services', [])
     signup: signup,
     signout: signout
   };
+})
+
+.factory('History', function($http) {
+  var getHistory = function() {
+    return $http({
+      method: 'GET',
+      url: '/api/items',
+    })
+    .then(function(resp){
+      return resp.data;
+    });
+  };
+
+  var removeItem = function(item) {
+    return $http({
+      method: 'DELETE',
+      url: '/api/items',
+      data: item
+    })
+    .then(function(resp) {
+      console.log('Deleted: ', resp);
+    });
+  };
+
+  return {
+    getHistory: getHistory,
+    removeItem: removeItem
+  };
 });
