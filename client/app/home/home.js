@@ -13,6 +13,7 @@ angular.module('associations.home', [])
     $scope.formShow = false;
     var itemsArray = [];
 
+    // Build up array for sending the POST request
     for(var i = 0; i < items.length; i++) {
       var item = {name: items[i]};
       itemsArray.push(item);
@@ -34,7 +35,11 @@ angular.module('associations.home', [])
     for(var i = 0; i < $scope.dummyData.length; i++) {
       var rec = $scope.dummyData[i];
       
+      // The function enclosed in parentheses is used for keeping
+      // the right index - this is necessary due to asynchronisity
       (function(rec, arg) {
+
+        // Call the service for obtaining Flickr image
         Items.getItemImage(rec, arg)
         .then(function(response) {
           $scope.dummyData[response.index].url = response.url;
