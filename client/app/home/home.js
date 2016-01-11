@@ -35,13 +35,14 @@ angular.module('associations.home', [])
     Items.getAssociations()
       .then(function(resp) {
         var results = resp.data;
+        console.log(results);
 
         for(var i = 0; i < results.length; i++) {
           var association = results[i];
 
           (function(association, arg) {
             // Call the service for obtaining Flickr image
-            Items.getItemImage(association, arg)
+            Items.getItemImage(association.item.name, arg)
             .then(function(response) {
               association.url = response.url;
               $scope.data.push(association);
@@ -69,6 +70,6 @@ angular.module('associations.home', [])
     //     });
     //   })(rec, i);
     // }
-  }();
+  };
 
 });

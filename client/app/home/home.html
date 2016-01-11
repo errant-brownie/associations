@@ -9,7 +9,7 @@
 <div class="enterForm" ng-show="formShow">
 	<p class="description">Enter new interests...</p>
 
-	<form ng-submit="addItems(data)">
+	<form ng-submit="addItems(data); renderRecs()">
 	  Interest 1: <input type="text" name="" ng-model="data[0]"><br>
 	  Interest 2: <input type="text" name="" ng-model="data[1]"><br>
 	  Interest 3: <input type="text" name="" ng-model="data[2]"><br>
@@ -22,7 +22,7 @@
 	<h2>Recommendations</h2>
 
 	<div class="recContainer" ng-repeat="n in data">
-		<div class="rec">{{n.name}}
+		<div class="rec">{{n.item.name}}
     <div style="clear:both"></div>
     <div class="img" style="background-image: url('{{n.url}}')"></div>
     </div>
