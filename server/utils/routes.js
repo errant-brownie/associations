@@ -1,10 +1,8 @@
 // Routes
 var auth = require('./auth'); // ./auth does some stuff to set up passport
-var itemsController = require('../controllers/itemsController');
-var associationsController = require('../controllers/associationsController');
-var usersController = require('../controllers/usersController');
-var engineController = require('../controllers/engineController');
-var categoriesController = require('../controllers/categoriesController');
+var itemsRequestHandler = require('../routeHandlers/itemsRequestHandler.js');
+var associationsRequestHandler = require('../routeHandlers/associationsRequestHandler.js');
+
 
 module.exports = function (app, express) {
   // put routes in here
@@ -24,14 +22,14 @@ module.exports = function (app, express) {
 
   // GET /api/items gets the items the user likes
   // inputs: 
-  // in data field:
+  // in session store:
   //   userid: id of user with the list we want to see,
   //     will use currently logged in user if userid is not
   //     provided
   // outputs:
   // in data field:
   //   items: list of item objects that the user likes
-  app.get('/api/items', itemsController.getAll);
+  app.get('/api/items', itemsRequestHandler.getAll);
 
   // POST /api/items adds items the user likes
   // inputs: 
@@ -41,7 +39,7 @@ module.exports = function (app, express) {
   // outputs:
   // in data field;
   //   item: the new items that were created
-  app.post('/api/items', itemsController.add);
+  app.post('/api/items', itemsRequestHandler.add);
 
   // GET /api/associations gets the top items a user might like
   // inputs: 
@@ -52,7 +50,7 @@ module.exports = function (app, express) {
   //   items: list of objects, each object will have a property "item"
   //     and "strength". "item" will link to an item object,
   //     "strength" will link to the item's association strength
-  app.get('/api/associations', associationsController.getAssociations);
+  app.get('/api/associations', associationsRequestHandler.getAssociations);
 
   // POST /api/associations custom association query
   // inputs:
@@ -70,5 +68,5 @@ module.exports = function (app, express) {
   //   items: list of objects, each object will have a property "item"
   //     and "strength". "item" will link to an item object,
   //     "strength" will link to the item's association strength
-  app.post('/api/associations', associationsController.postAssociations);
+  app.post('/api/associations', associationsRequestHandler.postAssociations);
 };

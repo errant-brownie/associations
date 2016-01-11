@@ -7,11 +7,11 @@ var LocalStrategy = require("passport-local").Strategy;
 var ensureAuth= require("connect-ensure-login");
 var bcrypt = require("bcrypt-node");
 var Promise = require("bluebird");
-var dbController = require("../db/dbController.js");
+var usersController = require("../controllers/usersController.js");
 
 passport.use(new LocalStrategy(
   function(username, password, done) {
-    dbController.getUser({username:username})
+    usersController.getUser({username:username})
     // found the user
     .then(function (user) {
       return Promise.promisify(bcrypt.compare)(password, user.password)
@@ -54,7 +54,7 @@ passport.serializeUser(function(user, cb) {
 });
 
 passport.deserializeUser(function(username, cb) {
-  dbController.getUser(username, function (err, user) {
+  usersController.getUser(username, function (err, user) {
     if (err) { return cb(err); }
     var data = {
       id: user.id,
@@ -79,7 +79,7 @@ var createUser = function(req, res, next){
   Promise.promisify(bcrypt.hash)(user.password,null,null)
   .then(function (data) {
     user.password = data;
-    return dbController.addUser(user);
+    return usersController.addUser(user);
   })
   .then(function (user) {
     var data = {};
