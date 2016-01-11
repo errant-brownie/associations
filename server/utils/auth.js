@@ -1,7 +1,6 @@
 // This module combines a bunch of passport stuff into one super authentication
 // utility.
 
-
 var passport = require("passport");
 var LocalStrategy = require("passport-local").Strategy;
 var ensureAuth= require("connect-ensure-login");
@@ -9,6 +8,7 @@ var bcrypt = require("bcrypt-node");
 var Promise = require("bluebird");
 var usersController = require("../controllers/usersController.js");
 
+// this creates our local strategy
 passport.use(new LocalStrategy(
   function (username, password, done) {
     usersController.getUser({username:username})
@@ -16,20 +16,15 @@ passport.use(new LocalStrategy(
     .then(function (user) {
       return Promise.promisify(bcrypt.compare)(password, user.password)
       .then(function (match) {
-        return {
-          match: match,
-          user: user,
+        // We nest these promises because we need to access both match and user.
+        if (match) {
+          // valid password
+          return done(null, user, {message: user.id});
+        } else {
+          // invalid password
+          return done(null, false, {message: "Incorrect password."});
         }
-      })
-    })
-    .then(function (data) {
-      if (data.match) {
-        // valid password
-        return done(null, data.user, {message: data.user.id});
-      } else {
-        // invalid password
-        return done(null, false, {message: "Incorrect password."});
-      }
+      });
     })
     // something happened
     .catch(function (err){
@@ -60,6 +55,7 @@ passport.deserializeUser(function (username, cb) {
       id: user.id,
       username: user.username,
     };
+    // data is set to request.user
     cb(null, data);
   })
   .catch(function (error){
@@ -96,6 +92,7 @@ var createUser = function (req, res, next){
 };
 
 var signOut = function(req, res){
+  // call passport's log out functionality
   req.logout();
   res.redirect('/');
 };
@@ -103,6 +100,8 @@ var signOut = function(req, res){
 module.exports = {
   passport: passport,
   authenticate: passport.authenticate('local', {}),
+  // ensuredLoggedIn is created by the guy who made Passport
+  // It's not ideal for checking REST API, but it works.
   ensureLoggedIn: ensureAuth.ensureLoggedIn,
   ensureNotLoggedIn: ensureAuth.ensureNotLoggedIn,
   createUser: createUser,

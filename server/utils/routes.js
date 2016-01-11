@@ -55,6 +55,7 @@ module.exports = function (app, express) {
   //     "strength" will link to the item's association strength
   app.get('/api/associations', auth.ensureLoggedIn('/#/signin'), associationsRequestHandler.getAssociations);
 
+  // BROKEN!
   // POST /api/associations custom association query
   // inputs:
   // in data field:

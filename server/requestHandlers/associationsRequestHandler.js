@@ -20,7 +20,8 @@ var getAssociations = function (request, response, next){
   });
 };
 
-// custom association query
+// BROKEN!
+// custom association query.
 // inputs:
 // in data field:
 //   items: [array] of items to check for associations, 
