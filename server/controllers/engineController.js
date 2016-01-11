@@ -15,7 +15,7 @@ var Promise = require('bluebird');
 // 
 // outputs:
 //  array of:
-//    { id: 123, name: 'abc', strength: 0.000 - 1.000, count: 123 }
+//    { item: { associated item object }, strength: 0.000 - 1.000, count: 123 }
 
 var getRelatedItems = function (itemList) {
   // max count for calculating relational strength
@@ -57,14 +57,15 @@ var getRelatedItems = function (itemList) {
       // find each item that this member 'likes'
       return itemUsersRecords.forEach(function (recordsArr) {
         recordsArr.Items.forEach(function (recordItem) {
+          // deletes unnecessary data from item object
+          delete recordItem.dataValues.item_user;
           // this check is to make sure that none of the items in the itemList exist in the return array
           if (itemObj[recordItem.id] === undefined) {
             if (!!itemCounts[recordItem.id]) {
               itemCounts[recordItem.id].count++;
             } else {
               itemCounts[recordItem.id] = {};
-              itemCounts[recordItem.id].id = recordItem.id;
-              itemCounts[recordItem.id].name = recordItem.name;
+              itemCounts[recordItem.id].item = recordItem.dataValues;
               itemCounts[recordItem.id].count = 1;
               itemCounts[recordItem.id].strength = 0;
             }
@@ -83,6 +84,7 @@ var getRelatedItems = function (itemList) {
       itemCounts[item].strength = itemCounts[item].count / maxCount;
       results.push(itemCounts[item]);
     }
+
     return results;
   })
 };
