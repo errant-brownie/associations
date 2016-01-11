@@ -1,7 +1,7 @@
 // Routes
 var auth = require('./auth'); // ./auth does some stuff to set up passport
-var itemsRequestHandler = require('../routeHandlers/itemsRequestHandler.js');
-var associationsRequestHandler = require('../routeHandlers/associationsRequestHandler.js');
+var itemsRequestHandler = require('../requestHandlers/itemsRequestHandler.js');
+var associationsRequestHandler = require('../requestHandlers/associationsRequestHandler.js');
 
 
 module.exports = function (app, express) {
