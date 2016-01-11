@@ -54,13 +54,16 @@ passport.serializeUser(function(user, cb) {
 });
 
 passport.deserializeUser(function(username, cb) {
-  usersController.getUser(username, function (err, user) {
-    if (err) { return cb(err); }
+  usersController.getUser({username: username})
+  .then (function (user) {
     var data = {
       id: user.id,
       username: user.username,
     };
     cb(null, data);
+  })
+  .catch(function (error){
+    return cb(error);
   });
 });
 
