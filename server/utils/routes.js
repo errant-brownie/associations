@@ -19,6 +19,7 @@ module.exports = function (app, express) {
     res.json({ message: "Authenticated" })
   });
   app.post('/api/users/signup', auth.createUser);
+  app.get('/signOut', auth.signOut);
 
   // GET /api/items gets the items the user likes
   // inputs: 

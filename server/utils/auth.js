@@ -94,10 +94,16 @@ var createUser = function (req, res, next){
   });
 };
 
+var signOut = function(req, res){
+  req.logout();
+  res.redirect('/');
+})
+
 module.exports = {
   passport: passport,
   authenticate: passport.authenticate('local', {}),
   ensureLoggedIn: ensureAuth.ensureLoggedIn,
   ensureNotLoggedIn: ensureAuth.ensureNotLoggedIn,
   createUser: createUser,
+  signOut: signOut
 };
