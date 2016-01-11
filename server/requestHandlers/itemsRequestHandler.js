@@ -1,3 +1,6 @@
+// File contains the express request handlers for the 
+// items endpoint
+
 var Items = require('../controllers/itemsController');
 var Promise = require('bluebird');
 
@@ -12,14 +15,17 @@ var Promise = require('bluebird');
 //   items: list of item objects that the user likes
 var getAll = function (request, response, next){
   var items = Items.getItemsForUsers([request.user.id]);
-  console.log('user: ' + request.user.id + ' gots these items: ');
-  console.dir(items);
-  response.json();
+  response.json(items);
 };
 
+// add item to the currently logged in user
 var add = function (request, response, next) {
   var items = request.body;
 
+  // We need to iterate over the items list, because Items.addItem 
+  // only takes one item at a time.
+  // Also, we're filtering for the items that were created so
+  // that we can return it in the response
   Promise.filter(items, function(item) {
     var params = {
       item: {
