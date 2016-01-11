@@ -22,35 +22,26 @@ var getRelatedItems = function (itemList) {
     itemObj[itemList[j].id] = 1;
   };
 
-  console.log('itemObj: ', itemObj)
-
   // for each item in the itemList array [ { id: 123, name: 'abc' }, { id: 124, name: 'xyz' } ]
   return Promise.reduce(itemList, function (itemCounts, item) {
     // find all occurances of that item in the join table, expected to return array of { user_id: xx, item_id: yy } to the .then block
-    console.log('item: ', item)
     return model.ItemUser.findAll({ 
       where: {
         item_id: item.id
       }
     })
     .then(function (items) {
-      console.log('itemid: ', item)
       var arr = []
       return Promise.each(items, function (item) {
-        console.log('reduce item: ', item.dataValues)
         arr.push(item.dataValues.user_id);
       })
       .then(function() {
         return itemsController.getItemsForUsers(arr)
       })
-      // return arr;
     })
     .spread(function (item) {
       // find each item that this member 'likes'
-      // console.log('item: ', item)
-      console.log('arg length: ', arguments)
       Promise.each(arguments, function (item) {
-        console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!',item.dataValues);
         if (itemObj[item.dataValues.id] === undefined) {
           if (!!itemCounts[item.dataValues.id]) {
             itemCounts[item.dataValues.id].count++;
@@ -72,6 +63,7 @@ var getRelatedItems = function (itemList) {
   }, {})
   .then(function (total) {
     console.log('total', total);
+    return total;
   })
 };
 
