@@ -85,7 +85,19 @@ angular.module('associations.services', [])
     return !!$window.localStorage.getItem('com.associations.authenticated');
   };
 
-  var signout = function() {};
+  var signout = function() {
+    $window.localStorage.removeItem('com.associations.authenticated');
+    return $http({
+      method: 'GET',
+      url: '/api/users/signout',
+      data: data
+    })
+  };
+
+
+  var isAuth = function () {
+    return !!$window.localStorage.getItem('com.associations.authenticated');
+  };
 
   return {
     signin: signin,

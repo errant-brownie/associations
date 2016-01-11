@@ -87,11 +87,17 @@ var createUser = function (req, res, next){
   .then(function (user) {
     var data = {};
     data.token = user.id;
-    res.json(data);
+    // sign in the new user
+    passport.authenticate('local', {});
   })
   .catch(function (error) {
     res.json(error);
   });
+};
+
+var signOut = function(req, res){
+  req.logout();
+  res.redirect('/');
 };
 
 module.exports = {
@@ -100,4 +106,5 @@ module.exports = {
   ensureLoggedIn: ensureAuth.ensureLoggedIn,
   ensureNotLoggedIn: ensureAuth.ensureNotLoggedIn,
   createUser: createUser,
+  signOut: signOut
 };

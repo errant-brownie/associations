@@ -16,9 +16,12 @@ module.exports = function (app, express) {
   // in data field:
   //    message: if failure, reason for failure
   app.post('/api/users/signin', auth.authenticate, function(req, res) {
-    res.json({ message: "Authenticated" })
+    res.json({ message: "Authenticated" });
   });
-  app.post('/api/users/signup', auth.createUser);
+  app.post('/api/users/signup', auth.createUser, function(req, res) {
+    res.json({ message: "Authenticated" });
+  });
+  app.get('/signOut', auth.signOut);
 
   // GET /api/items gets the items the user likes
   // inputs: 
