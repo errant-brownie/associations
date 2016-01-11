@@ -32,7 +32,7 @@ module.exports = function (app, express) {
   // outputs:
   // in data field:
   //   items: list of item objects that the user likes
-  app.get('/api/items', itemsRequestHandler.getAll);
+  app.get('/api/items', auth.ensureLoggedIn('/#/signin'), itemsRequestHandler.getAll);
 
   // POST /api/items adds items the user likes
   // inputs: 
@@ -42,7 +42,7 @@ module.exports = function (app, express) {
   // outputs:
   // in data field;
   //   item: the new items that were created
-  app.post('/api/items', itemsRequestHandler.add);
+  app.post('/api/items', auth.ensureLoggedIn('/#/signin'), itemsRequestHandler.add);
 
   // GET /api/associations gets the top items a user might like
   // inputs: 
@@ -53,7 +53,7 @@ module.exports = function (app, express) {
   //   items: list of objects, each object will have a property "item"
   //     and "strength". "item" will link to an item object,
   //     "strength" will link to the item's association strength
-  app.get('/api/associations', associationsRequestHandler.getAssociations);
+  app.get('/api/associations', auth.ensureLoggedIn('/#/signin'), associationsRequestHandler.getAssociations);
 
   // POST /api/associations custom association query
   // inputs:
@@ -71,5 +71,5 @@ module.exports = function (app, express) {
   //   items: list of objects, each object will have a property "item"
   //     and "strength". "item" will link to an item object,
   //     "strength" will link to the item's association strength
-  app.post('/api/associations', associationsRequestHandler.postAssociations);
+  app.post('/api/associations', auth.ensureLoggedIn('/#/signin'), associationsRequestHandler.postAssociations);
 };
