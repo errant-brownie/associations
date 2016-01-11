@@ -3,7 +3,7 @@
 //
 angular.module('associations.history', [])
 
-.controller('HistoryController', function ($scope, $http, History) {
+.controller('HistoryController', function ($scope, $http, History, Items) {
   $scope.items = [];
   $scope.editing = false;
 
@@ -15,25 +15,15 @@ angular.module('associations.history', [])
           var item = resp[i];
           $scope.items.push(item);
 
-          // Use the flickr API to get related pictures
-          var url = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=2fe873304c3096cb7755b84e7002f982&text='
-           + item.name + '&tag='+ item.name + '&content_type=1&per_page=20&format=json&nojsoncallback=1';
-          
-          (function(arg){
-            $http({
-              method: 'GET',
-              url: url
-            }).then(function successCallback(response) {
-                var random = Math.floor(Math.random() * 10);
-
-                var result = response.data.photos.photo[random];
-                var imgSrc = "http://farm"+ result.farm +".static.flickr.com/"+ result.server +"/"+ result.id +"_"+ result.secret +"_m.jpg";
-
-                $scope.items[arg].url = imgSrc;
-              }, function errorCallback(err) {
-                console.log('Error: ', err);
-              });
-          })(i);
+          (function(item, arg) {
+            Items.getItemImage(item, arg)
+            .then(function(response) {
+              $scope.items[response.index].url = response.url;
+            })
+            .catch(function(response) {
+              console.log('Error at history\'s initialize: ', response);
+            });
+          })(item, i);
         }
       })
       .catch(function(err) {

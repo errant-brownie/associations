@@ -4,53 +4,46 @@
 //
 angular.module('associations.home', [])
 
-.controller('HomeController', function ($scope, Items, $http) {
+.controller('HomeController', function ($scope, $http, Items) {
   $scope.formShow = true;
   $scope.data = [];
 
+  //// Function for adding the user's interests to the database
   $scope.addItems = function(items) {
     $scope.formShow = false;
+    var itemsArray = [];
 
     for(var i = 0; i < items.length; i++) {
       var item = {name: items[i]};
-      Items.addItem(item)
-        .then(function(resp){
-          console.log('Successful addition! ', resp);
-        })
-        .catch(function(error) {
-          console.log('Error at addItems: ', error);
-        });
+      itemsArray.push(item);
     }
-  };
-//https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=44ae497a4c4a7f8eb0dee6d4489cf84a&tags=dog&format=json&nojsoncallback=1
 
-  $scope.dummyData = [{title:"tomato"}, {title:"america"}, {title:"computer"}, {title:"fruit"}, {title:"swimming"}, {title:"bird"}];
+    Items.addItems(itemsArray)
+      .then(function(resp){
+        console.log('Successful addition! ', resp);
+      })
+      .catch(function(error) {
+        console.log('Error at addItems: ', error);
+      });
+  };
+
+  $scope.dummyData = [{name:"tomato"}, {name:"cake"}, {name:"bed"}, {name:"fruit"}, {name:"swimming"}, {name:"bird"}];
+
+  //// Function for displaying the photos of each recommendation
   $scope.renderRecs = function(recs) {
     for(var i = 0; i < $scope.dummyData.length; i++) {
       var rec = $scope.dummyData[i];
-      var url = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=2fe873304c3096cb7755b84e7002f982&text='
-       + rec.title + '&tag='+ rec.title + '&content_type=1&per_page=20&format=json&nojsoncallback=1';
       
-      (function(arg){
-        $http({
-          method: 'GET',
-          url: url
-        }).then(function successCallback(response) {
-            var random = Math.floor(Math.random() * 10);
-
-            var item = response.data.photos.photo[random];
-            var imgSrc = "http://farm"+ item.farm +".static.flickr.com/"+ item.server +"/"+ item.id +"_"+ item.secret +"_m.jpg";
-
-            $scope.dummyData[arg].url = imgSrc;
-          }, function errorCallback(response) {
-            console.log("ERROR");
-          });
-      })(i);
-
+      (function(rec, arg) {
+        Items.getItemImage(rec, arg)
+        .then(function(response) {
+          $scope.dummyData[response.index].url = response.url;
+        })
+        .catch(function(response) {
+          console.log('Error at renderRecs: ', response);
+        });
+      })(rec, i);
     }
   }();
-  
-//src = "http://farm"+ item.farm +".static.flickr.com/"+ item.server +"/"+ item.id +"_"+ item.secret +"_m.jpg";
-
 
 });
