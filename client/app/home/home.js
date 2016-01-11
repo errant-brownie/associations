@@ -35,7 +35,7 @@ angular.module('associations.home', [])
   $scope.renderRecs = function() {
     Items.getAssociations()
       .then(function(resp) {
-        var results = resp.data;
+        var results = resp;
         console.log(resp);
 
         for(var i = 0; i < results.length; i++) {
