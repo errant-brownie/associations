@@ -4,8 +4,8 @@
   "description": "Association engine",
   "main": "app.js",
   "scripts": {
-    "dbtest": "ENV_DB = testdb mocha server/controllers/controllerTests.js",
-    "run": "ENV_DB = freeAssoc node app.js"
+    "dbtest": "ENV_DB=testdb mocha server/controllers/controllerTests.js",
+    "start": "ENV_DB=freeAssoc nodemon server/app.js"
   },
   "engines": {
     "node": "5.4.0"
