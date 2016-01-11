@@ -98,7 +98,7 @@ var createUser = function (req, res, next){
 var signOut = function(req, res){
   req.logout();
   res.redirect('/');
-})
+};
 
 module.exports = {
   passport: passport,
