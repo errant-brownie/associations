@@ -1,7 +1,7 @@
 // Routes
 var auth = require('./auth'); // ./auth does some stuff to set up passport
-var itemsRouteHandler = require('../routeHandlers/itemsRouteHandler.js');
-var associationsRouteHandler = require('../routeHandlers/associationsRouteHandler.js');
+var itemsRequestHandler = require('../routeHandlers/itemsRequestHandler.js');
+var associationsRequestHandler = require('../routeHandlers/associationsRequestHandler.js');
 
 
 module.exports = function (app, express) {
@@ -22,7 +22,7 @@ module.exports = function (app, express) {
 
   // GET /api/items gets the items the user likes
   // inputs: 
-  // in data field:
+  // in session store:
   //   userid: id of user with the list we want to see,
   //     will use currently logged in user if userid is not
   //     provided

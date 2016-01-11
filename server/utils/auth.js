@@ -7,7 +7,7 @@ var LocalStrategy = require("passport-local").Strategy;
 var ensureAuth= require("connect-ensure-login");
 var bcrypt = require("bcrypt-node");
 var Promise = require("bluebird");
-var usersController = require("../controllers.userController.js");
+var usersController = require("../controllers/usersController.js");
 
 passport.use(new LocalStrategy(
   function(username, password, done) {

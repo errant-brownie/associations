@@ -8,7 +8,7 @@ var getAssociations = function (request, response, next){
     {item: {name: "essays"}, strength: 0.002},
     {item: {name: "pizza"}, strength: 0.538}
   ]);
-},
+};
 
 var postAssociations = function(request,response,next){
   response.json([
@@ -18,7 +18,8 @@ var postAssociations = function(request,response,next){
     {item: {name: "essays"}, strength: 0.002},
     {item: {name: "pizza"}, strength: 0.538}
   ]);
-}
+};
+
 module.exports = {
   getAssociations: getAssociations,
   postAssociations: postAssociations,
