@@ -5,6 +5,7 @@ angular.module('associations.history', [])
 
 .controller('HistoryController', function ($scope, $http, History) {
   $scope.items = [];
+  $scope.editing = false;
 
   // Query db for the user's stored likes then render them
   $scope.initialize = function() {
@@ -12,6 +13,7 @@ angular.module('associations.history', [])
       .then(function(resp) {
         for(var i = 0; i < resp.length; i++) {
           var item = resp[i];
+          $scope.items.push(item);
 
           // Use the flickr API to get related pictures
           var url = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=2fe873304c3096cb7755b84e7002f982&text='
@@ -38,4 +40,16 @@ angular.module('associations.history', [])
         console.log('Error at history initialization: ', err);
       });
   }();
+
+  $scope.removeItem = function(index) {
+    var deleteItem = { name: $scope.items[index].name };
+    History.removeItem(deleteItem)
+      .then(function() {
+        $scope.items.splice(index, 1);
+        console.log('Successfully deleted: ', deleteItem);
+      })
+      .catch(function(err) {
+        console.log('Error at removeItem: ', err);
+      });
+  };
 });

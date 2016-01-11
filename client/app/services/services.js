@@ -62,10 +62,24 @@ angular.module('associations.services', [])
       method: 'GET',
       url: '/api/items',
     })
-    .then(function(){});
+    .then(function(resp){
+      return resp.data;
+    });
+  };
+
+  var removeItem = function(item) {
+    return $http({
+      method: 'DELETE',
+      url: '/api/items',
+      data: item
+    })
+    .then(function(resp) {
+      console.log('Deleted: ', resp);
+    });
   };
 
   return {
-    getHistory: getHistory
+    getHistory: getHistory,
+    removeItem: removeItem
   };
 });
