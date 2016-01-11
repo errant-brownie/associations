@@ -93,6 +93,6 @@ module.exports = {
   getRelatedItems: getRelatedItems
 };
 
-var testItem = [{id: 1}, {id:2}, {id:3}];
-var testGRI = getRelatedItems(testItem);
-console.log(testGRI);
+// var testItem = [{id: 1}, {id:2}, {id:3}];
+// var testGRI = getRelatedItems(testItem);
+// console.log(testGRI);
