@@ -87,7 +87,8 @@ var createUser = function (req, res, next){
   .then(function (user) {
     var data = {};
     data.token = user.id;
-    res.json(data);
+    // sign in the new user
+    passport.authenticate('local', {});
   })
   .catch(function (error) {
     res.json(error);
