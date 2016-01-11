@@ -1,73 +1,75 @@
-body{
+body {
 	font-family: 'Montserrat', sans-serif;
 	background-image: url("http://i.imgur.com/CoygARX.png");
 }
 
-h1{
+h1 {
 	text-align: center;
 	margin-top: 1%;
 	font-size: 2.5em;
 }
 
-h2{
-    text-align: center;
-    font-size: 1em;
+h2 {
+  text-align: center;
+  font-size: 1em;
 }
 
-.result{
-    text-align: center;
+.result {
+  text-align: center;
 }
 
-.rec{
-    float:left;
-    display: inline-block;
-    width: 150px;
-
+.rec {
+  float:left;
+  display: inline-block;
+  width: 32.3%;
+  padding: 2px;
 }
 
-.recContainer{
-    width: 40%;
-    margin: 0 auto;
-    min-width: 300px;
-
+.recContainer {
+  width: 40%;
+  margin: 0 auto;
+  min-width: 500px;
 }
 
-.img{
-    width: 120px;
-    height: 120px;
-    border: 1px solid gray;
-    display: inline-block;
-    background-size: cover;
-    background-position: center; 
-    background-repeat: no-repeat;
+.img {
+  width: 100%;
+  height: 120px;
+  border: 1px solid gray;
+  display: inline-block;
+  background-size: cover;
+  background-position: center; 
+  background-repeat: no-repeat;
 }
 
-a{
-    text-decoration: none;
-    color:brown;
-}
-img{
-    width:80%;
+a {
+  text-decoration: none;
+  color:brown;
 }
 
-.nav{
-    border:1px solid #ccc;
-    border-width:1px;
-    list-style:none;
-    margin:0;
-    padding:0;
-    text-align:center;
-    border-radius: 25px;
-    width: 50%;
-    margin: 0 auto;
-    background-color:white;
+img { 
+  width:80%;
 }
+
+.nav { 
+  border:1px solid #ccc;
+  border-width:1px;
+  list-style:none;
+  margin:0;
+  padding:0;
+  text-align:center;
+  border-radius: 25px;
+  width: 50%;
+  margin: 0 auto;
+  background-color:white;
+}
+
 .nav li{
-    display:inline;
+  display:inline;
 }
+
 .nav a{
-    display:inline-block;
-    padding:10px 25px;
+  display:inline-block;
+  padding:10px 25px;
 }
 
 .description{
@@ -82,46 +84,46 @@ form{
 }
 
 input[type=text]{
-        border: 1px solid #cdcdcd;
-        border-color: rgba(0,0,0,.14);
-        background-color: AliceBlue;
-        font-size: 15px;
-        margin:10px 0;
-        border-radius: 5px;
+  border: 1px solid #cdcdcd;
+  border-color: rgba(0,0,0,.14);
+  background-color: AliceBlue;
+  font-size: 15px;
+  margin:10px 0;
+  border-radius: 5px;
 }
 
 input[type=text]{
-        margin:10px auto;
+  margin:10px auto;
 }
 
 button{
-    background-color: AliceBlue;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius:6px;
-    color: black;
-    font-family: 'Oswald';
-    font-size: 17px;
-    padding: 4px 9px;
-    text-decoration: none;
-    cursor: pointer;
-    border: 1px solid rgba(0,0,0,.14);
-    margin-top:15px;
+  background-color: AliceBlue;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius:6px;
+  color: black;
+  font-family: 'Oswald';
+  font-size: 17px;
+  padding: 4px 9px;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid rgba(0,0,0,.14);
+  margin-top:15px;
 }
 
 .edit-history {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 .history-items {
-    text-align: center;
+  text-align: center;
 }
 
 .history-container {
-    text-align: center;
+  text-align: center;
 }
 
 .delete-item {
-    margin-top: 5px;
-    margin-bottom: 15px;
+  margin-top: 5px;
+  margin-bottom: 15px;
 }

@@ -8,17 +8,40 @@
 angular.module('associations.services', [])
 
 .factory('Items', function($http) {
-  var addItem = function(item) {
+  var addItems = function(items) {
     return $http({
       method: 'POST',
       url: '/api/items',
-      data: item
+      data: items
     })
     .then(function(resp) {}());
   };
 
+  //// This method is for obtaining an image url from the Flickr API
+  // The url format is as follows:
+  // src = "http://farm"+ item.farm +".static.flickr.com/"+ item.server +"/"+ item.id +"_"+ item.secret +"_m.jpg";
+  var getItemImage = function(item, index) {
+    var url = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=2fe873304c3096cb7755b84e7002f982&text='
+     + item.name + '&tag='+ item.name + '&content_type=1&per_page=20&format=json&nojsoncallback=1';
+
+    return $http({
+      method: 'GET',
+      url: url
+    }).then(function successCallback(response) {
+      var random = Math.floor(Math.random() * 10);
+
+      var result = response.data.photos.photo[random];
+      var imgSrc = "http://farm"+ result.farm +".static.flickr.com/"+ result.server +"/"+ result.id +"_"+ result.secret +"_m.jpg";
+
+      return { index: index, url: imgSrc };
+    }).catch(function errorCallback(response) {
+      console.log('Error at getItemImages: ', err);
+    });
+  };
+
   return {
-    addItem: addItem
+    addItems: addItems,
+    getItemImage: getItemImage
   };
 })
 
