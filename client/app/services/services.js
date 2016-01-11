@@ -94,11 +94,6 @@ angular.module('associations.services', [])
     })
   };
 
-
-  var isAuth = function () {
-    return !!$window.localStorage.getItem('com.associations.authenticated');
-  };
-
   return {
     signin: signin,
     signup: signup,
