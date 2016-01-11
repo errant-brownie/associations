@@ -1,5 +1,5 @@
-//// Services for authentication and obtainin data
-//    -Functions for populating history and dashboard views
+//// Services for authentication and obtaining data
+//    -Functions for populating history and recommendation views
 //    -Sign in and sign out functions
 //    -Item adding functionality
 //
@@ -26,6 +26,8 @@ angular.module('associations.services', [])
   // src = "http://farm"+ item.farm +".static.flickr.com/"+ item.server +"/"+ item.id +"_"+ item.secret +"_m.jpg";
   //
   var getItemImage = function(item, index) {
+
+    // Format the URL for querying the Flickr API
     var url = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=2fe873304c3096cb7755b84e7002f982&text='
      + item.name + '&tag='+ item.name + '&content_type=1&per_page=20&format=json&nojsoncallback=1';
 
@@ -35,10 +37,11 @@ angular.module('associations.services', [])
     }).then(function successCallback(response) {
       var random = Math.floor(Math.random() * 10);
 
+      // Obtain a random photo from the results of querying Flickr API
       var result = response.data.photos.photo[random];
       var imgSrc = "http://farm"+ result.farm +".static.flickr.com/"+ result.server +"/"+ result.id +"_"+ result.secret +"_m.jpg";
 
-      return { 
+      return {
         index: index, 
         url: imgSrc 
       };

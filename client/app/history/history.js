@@ -18,6 +18,8 @@ angular.module('associations.history', [])
           var item = resp[i];
           $scope.items.push(item);
 
+          // The function enclosed in parentheses is used for keeping
+          // the right index - this is necessary due to asynchronisity
           (function(item, arg) {
             Items.getItemImage(item, arg)
             .then(function(response) {
@@ -34,8 +36,11 @@ angular.module('associations.history', [])
       });
   }();
 
+  // This allows users to remove items they are no longer interested in
   $scope.removeItem = function(index) {
+    // Format the item to delete before request is made
     var deleteItem = { name: $scope.items[index].name };
+
     History.removeItem(deleteItem)
       .then(function() {
         $scope.items.splice(index, 1);
