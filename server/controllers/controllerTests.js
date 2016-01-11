@@ -14,7 +14,7 @@ describe("Free Association Engine", function() {
     dbConnection = mysql.createConnection({
       user: "root",
       password: "password",
-      database: "freeAssoc"
+      database: process.env.ENV_DB
     });
     dbConnection.connect();
 
@@ -78,6 +78,7 @@ describe("Free Association Engine", function() {
     usersController.getUser(badUser)
       .then(function (user) {
         expect(user).to.equal(undefined);
+        done();
       })
       .catch(function (err) {
         console.log(err);
