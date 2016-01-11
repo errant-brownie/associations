@@ -22,6 +22,7 @@ angular.module('associations.home', [])
     Items.addItems(itemsArray)
       .then(function(resp){
         console.log('Successful addition! ', resp);
+        $scope.renderRecs();
       })
       .catch(function(error) {
         console.log('Error at addItems: ', error);
@@ -35,7 +36,7 @@ angular.module('associations.home', [])
     Items.getAssociations()
       .then(function(resp) {
         var results = resp.data;
-        console.log(results);
+        console.log(resp);
 
         for(var i = 0; i < results.length; i++) {
           var association = results[i];

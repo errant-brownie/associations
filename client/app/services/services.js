@@ -15,6 +15,7 @@ angular.module('associations.services', [])
       url: '/api/associations'
     })
     .then(function(resp) {
+      console.log('getAssociations response: ', resp);
       return resp.data;
     });
   };
