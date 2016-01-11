@@ -2,6 +2,10 @@
 var auth = require('./auth'); // ./auth does some stuff to set up passport
 var itemsController = require('../controllers/itemsController');
 var associationsController = require('../controllers/associationsController');
+var usersController = require('../controllers/usersController');
+var engineController = require('../controllers/engineController');
+var categoriesController = require('../controllers/categoriesController');
+
 module.exports = function (app, express) {
   // put routes in here
 

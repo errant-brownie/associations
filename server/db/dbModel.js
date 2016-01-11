@@ -53,9 +53,9 @@ module.exports = {
 // init();
 
 // userTest1 = {username: 'test1', password:'test1'};
-// itemTest1 = {name: 'shit sandwich'};
+// itemTest1 = {name: 'item1'};
 
-// userTest2 = {username: 'bad mutha fucka', password: 'fo sho'};
+// userTest2 = {username: 'test2', password: 'test2'};
 
 // setTimeout(function() {
 //   User.create(userTest1)
@@ -70,13 +70,13 @@ module.exports = {
 //             })
 //         })
 //         .catch(function (err) {
-//           throw (new Error('No user found, what the fuck?!'));
+//           throw (new Error('No user found?!'));
 //         })
 //     })
 // }, 2500)
 
 // setTimeout(function() {
-//   Item.findOrCreate({where: {name: 'shit sandwich2'}})
+//   Item.findOrCreate({where: {name: 'item2'}})
 //     .then(function(item) {
 //       console.log(arguments)
 //     })
