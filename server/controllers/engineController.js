@@ -1,4 +1,6 @@
 var model = require('../db/dbModel.js');
+var itemsController = require('./itemsController');
+var Promise = require('bluebird');
 
 // The heart of the project...
 // The order of operations is as follows:
@@ -9,59 +11,73 @@ var model = require('../db/dbModel.js');
 // 5) Return array of objects consisting of {id: item.id, name: item.name, strength: (calculated strength) }
 
 var getRelatedItems = function (itemList) {
-  var data = {};
   var itemObj = {};
+  var data = {}; 
 
   // max count for calculating relational strength
   var maxCount = 0;
 
   // translate itemList into object for fast referencing
   for (var j = 0; j < itemList.length; j++) {
-    itemObj[itemList[j].name] = null;
+    itemObj[itemList[j].id] = 1;
   };
 
-  // for each item in the itemList array [ { id: 123, name: 'abc' }, { id: 124, name: 'xyz' } ]
-  Promise.reduce(itemList, function(item) {
-    // find all occurances of that item in the join table, expected to return array of { user_id: xx, item_id: yy } to the .then block
-    return model.itemUser.findAll({ where: { item_id: itemList[i].id }})
-      .then(function (member) {
-        var itemCounts = {};
+  console.log('itemObj: ', itemObj)
 
-        // for each item_id in the array of { user_id: xx, item_id: yy }'s
-        for (var i = 0; i < member.length; i++) {
-          // find each item that this member 'likes'
-          model.Item.findOne({ where: { id: member[i].item_id }})
-            .then(function (item) {
-              if (!itemObj[item.name]) {
-                if (itemCounts[item.name]) {
-                  itemCounts[item.name].count++;
-                } else {
-                  itemCounts[item.name].id = item.id;
-                  itemCounts[item.name].count = 1;
-                  itemCounts[item.name].strength = 0;
-                }
-              }
-            })
-        }
-        return itemCounts;
+  // for each item in the itemList array [ { id: 123, name: 'abc' }, { id: 124, name: 'xyz' } ]
+  return Promise.reduce(itemList, function (itemCounts, item) {
+    // find all occurances of that item in the join table, expected to return array of { user_id: xx, item_id: yy } to the .then block
+    console.log('item: ', item)
+    return model.ItemUser.findAll({ 
+      where: {
+        item_id: item.id
+      }
+    })
+    .then(function (items) {
+      console.log('itemid: ', item)
+      var arr = []
+      return Promise.each(items, function (item) {
+        console.log('reduce item: ', item.dataValues)
+        arr.push(item.dataValues.user_id);
       })
-      .then(function (itemCounts) {
-        for (var item in itemCounts) {
-          if (data[item]) {
-            data[item].count += itemCounts[item].count;
+      .then(function() {
+        return itemsController.getItemsForUsers(arr)
+      })
+      // return arr;
+    })
+    .spread(function (item) {
+      // find each item that this member 'likes'
+      // console.log('item: ', item)
+      console.log('arg length: ', arguments)
+      Promise.each(arguments, function (item) {
+        console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!',item.dataValues);
+        if (itemObj[item.dataValues.id] === undefined) {
+          if (!!itemCounts[item.dataValues.id]) {
+            itemCounts[item.dataValues.id].count++;
           } else {
-            for (var prop in item) {
-              data[item].prop = itemCounts[item].prop;
-            }
+            itemCounts[item.dataValues.id] = {};
+            itemCounts[item.dataValues.id].id = item.id;
+            itemCounts[item.dataValues.id].count = 1;
+            itemCounts[item.dataValues.id].strength = 0;
           }
-          if (data[item.name].count > maxCount) {
-            maxCount = data[item.name].count;
+          console.log('item counts: ', itemCounts)
+          console.log('maxCount', maxCount)
+          if (itemCounts[item.dataValues.id].count > maxCount) {
+            maxCount = itemCounts[item.dataValues.id].count;
           }
         }
       })
-  }
-  }, data)
+      return itemCounts;
+    })
+  }, {})
+  .then(function (total) {
+    console.log('total', total);
+  })
+};
 
 module.exports = {
   getRelatedItems: getRelatedItems
 };
+
+// var testItem = [{id: 1}, {id:2}, {id:3}];
+// var testGRI = getRelatedItems(testItem);

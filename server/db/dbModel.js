@@ -70,7 +70,7 @@ module.exports = {
 //             })
 //         })
 //         .catch(function (err) {
-//           throw (new Error('No user found, what the fuck?!'));
+//           throw (new Error('No user found?!'));
 //         })
 //     })
 // }, 2500)
