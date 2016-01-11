@@ -11,6 +11,9 @@ angular.module('associations.history', [])
   $scope.initialize = function() {
     History.getHistory()
       .then(function(resp) {
+
+        // This is for looping through the user's history and obtaining
+        // images for each
         for(var i = 0; i < resp.length; i++) {
           var item = resp[i];
           $scope.items.push(item);

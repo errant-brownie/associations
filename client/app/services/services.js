@@ -8,6 +8,10 @@
 angular.module('associations.services', [])
 
 .factory('Items', function($http) {
+
+  //// This method is for when the user first signs up
+  //    -The user is required to enter a minimum of 3 items
+  //
   var addItems = function(items) {
     return $http({
       method: 'POST',
@@ -20,6 +24,7 @@ angular.module('associations.services', [])
   //// This method is for obtaining an image url from the Flickr API
   // The url format is as follows:
   // src = "http://farm"+ item.farm +".static.flickr.com/"+ item.server +"/"+ item.id +"_"+ item.secret +"_m.jpg";
+  //
   var getItemImage = function(item, index) {
     var url = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=2fe873304c3096cb7755b84e7002f982&text='
      + item.name + '&tag='+ item.name + '&content_type=1&per_page=20&format=json&nojsoncallback=1';
@@ -33,7 +38,10 @@ angular.module('associations.services', [])
       var result = response.data.photos.photo[random];
       var imgSrc = "http://farm"+ result.farm +".static.flickr.com/"+ result.server +"/"+ result.id +"_"+ result.secret +"_m.jpg";
 
-      return { index: index, url: imgSrc };
+      return { 
+        index: index, 
+        url: imgSrc 
+      };
     }).catch(function errorCallback(response) {
       console.log('Error at getItemImages: ', err);
     });
@@ -80,6 +88,9 @@ angular.module('associations.services', [])
 })
 
 .factory('History', function($http) {
+
+  //// This is for obtaining a list of al the items the user has entered
+  //     
   var getHistory = function() {
     return $http({
       method: 'GET',
@@ -90,6 +101,8 @@ angular.module('associations.services', [])
     });
   };
 
+  //// This is for allowing the user to remove items from their history
+  //
   var removeItem = function(item) {
     return $http({
       method: 'DELETE',
