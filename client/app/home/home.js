@@ -7,6 +7,7 @@ angular.module('associations.home', [])
 .controller('HomeController', function ($scope, $http, Items) {
   $scope.formShow = true;
   $scope.data = [];
+  $scope.associations = [];
 
   //// Function for adding the user's interests to the database
   $scope.addItems = function(items) {
@@ -35,6 +36,8 @@ angular.module('associations.home', [])
   $scope.renderRecs = function() {
     Items.getAssociations()
       .then(function(resp) {
+        $scope.associations = [];
+        
         var results = resp;
         console.log(resp);
 
@@ -46,7 +49,7 @@ angular.module('associations.home', [])
             Items.getItemImage(association.item.name, arg)
             .then(function(response) {
               association.url = response.url;
-              $scope.data.push(association);
+              $scope.associations.push(association);
             })
             .catch(function(response) {
               console.log('Error at renderRecs: ', response);
@@ -54,23 +57,5 @@ angular.module('associations.home', [])
           })(association, i);
         }
       });
-    // for(var i = 0; i < $scope.dummyData.length; i++) {
-    //   var rec = $scope.dummyData[i];
-      
-    //   // The function enclosed in parentheses is used for keeping
-    //   // the right index - this is necessary due to asynchronisity
-    //   (function(rec, arg) {
-
-    //     // Call the service for obtaining Flickr image
-    //     Items.getItemImage(rec, arg)
-    //     .then(function(response) {
-    //       $scope.dummyData[response.index].url = response.url;
-    //     })
-    //     .catch(function(response) {
-    //       console.log('Error at renderRecs: ', response);
-    //     });
-    //   })(rec, i);
-    // }
   };
-
 });
