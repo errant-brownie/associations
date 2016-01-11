@@ -1,14 +1,52 @@
-module.exports = {
-  getAll: function (request, response, next){
-    response.json([
-      {name: "video games"},
-      {name: "cats"},
-      {name: "computers"},
-      {name: "ui design"},
-    ]);
-  },
+var model = require('../db/dbModel.js');
 
-  add: function(request, response, next){
-    response.json(request.body);
-  }
+var addItem = function (object) {
+  // object will have the following format { item: { name: 'xyz' }, user: { id: 'INTEGER', name: 'abc' } }
+  var params = { name: object.item.name }
+  return model.Item.findOrCreate({ where: params, defaults: params })
+    .spread(function(item) {
+      var params = { item_id: item.id, user_id: object.user.id }
+      return model.ItemUser.findOrCreate({ where: params, defaults: params });
+    })
+};
+
+var getItems = function (userId) {
+  return model.User.findOne({ 
+    where: {
+      id: userId
+    },
+    include: [ model.Item ]
+  }).then(function(user) {
+    return user.Items;
+  });
+};
+
+var getItemsForUsers = function(userIds) {
+  return model.ItemUser.findAll({
+    where: {
+      user_id: userIds
+    }
+  }).then(function(results) {
+    return model.Item.findAll({
+      where: {
+        id: results.map(function(result) {
+          return result.item_id
+        })
+      }
+    })
+  })
 }
+
+module.exports = {
+  getItems: getItems,
+  addItem: addItem
+};
+
+addItem({ item: { name: "asdf" }, user: { id: 1 } })
+    .then(function() {
+      return getItems(1)
+    }).then(function(items) {
+      console.log(items.map(function(item) {
+        return item.toJSON()
+      }))
+    })
