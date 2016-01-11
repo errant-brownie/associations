@@ -22,7 +22,9 @@ var add = function (request, response, next) {
 
   Promise.filter(items, function(item) {
     var params = {
-      item: item.name,
+      item: {
+        name: item.name
+      },
       user: {
         id : request.user.id,
         name: request.user.username,
