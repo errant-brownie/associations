@@ -9,6 +9,16 @@ angular.module('associations.services', [])
 
 .factory('Items', function($http) {
 
+  var getAssociations = function() {
+    return $http({
+      method: 'GET',
+      url: '/api/associations'
+    })
+    .then(function(resp) {
+      return resp.data;
+    });
+  };
+
   //// This method is for when the user first signs up
   //    -The user is required to enter a minimum of 3 items
   //
@@ -52,7 +62,8 @@ angular.module('associations.services', [])
 
   return {
     addItems: addItems,
-    getItemImage: getItemImage
+    getItemImage: getItemImage,
+    getAssociations: getAssociations
   };
 })
 
