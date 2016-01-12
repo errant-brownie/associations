@@ -42,7 +42,10 @@ angular.module('associations.history', [])
   // This allows users to remove items they are no longer interested in
   $scope.removeItem = function(index) {
     // Format the item to delete before request is made
-    var deleteItem = { name: $scope.items[index].name };
+    var deleteItem = { 
+      name: $scope.items[index].name, 
+      id: $scope.items[index].id 
+    };
 
     History.removeItem(deleteItem)
       .then(function() {
