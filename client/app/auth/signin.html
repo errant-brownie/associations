@@ -1,4 +1,7 @@
+<h1>Associations</h1>
+
 <h1>Sign In</h1>
+
 <div id='signin'>
   <form name="signinForm" ng-submit='signin()'>
     <label for="username">Username:</label>
@@ -7,5 +10,8 @@
     <input type="password" id="password" ng-model='user.password'>
     <button>signin</button>
   </form>
-  <a href="#/signup">Don't have an account? <strong>Signup</strong> ...</a>
+
+  <div class="redirect">
+    <a href="#/signup">Don't have an account? <strong>Signup</strong> ...</a>
+  </div>
 </div>
