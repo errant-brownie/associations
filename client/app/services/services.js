@@ -125,6 +125,7 @@ angular.module('associations.services', [])
       url: '/api/items',
     })
     .then(function(resp){
+      console.log(resp);
       return resp.data;
     });
   };
