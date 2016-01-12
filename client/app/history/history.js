@@ -1,6 +1,9 @@
 //// Module for the history of items user has liked
 //    -Display all of the user's entered interests
 //
+//    ** History does not work properly when the user is not
+//       signed in yet!
+//
 angular.module('associations.history', [])
 
 .controller('HistoryController', function ($scope, $http, History, Items) {
