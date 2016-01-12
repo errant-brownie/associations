@@ -6,7 +6,7 @@
 //
 angular.module('associations.history', [])
 
-.controller('HistoryController', function ($scope, $http, History, Items) {
+.controller('HistoryController', function ($scope, $http, History, Items, Auth) {
   $scope.items = [];
   $scope.editing = false;
 
@@ -52,5 +52,9 @@ angular.module('associations.history', [])
       .catch(function(err) {
         console.log('Error at removeItem: ', err);
       });
+  };
+
+  $scope.signout = function() {
+    Auth.signout();
   };
 });
