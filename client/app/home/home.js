@@ -4,7 +4,7 @@
 //
 angular.module('associations.home', [])
 
-.controller('HomeController', function ($scope, $http, Items) {
+.controller('HomeController', function ($scope, $http, Items, Auth) {
   $scope.formShow = true;
   $scope.data = [];
   $scope.associations = [];
@@ -57,5 +57,9 @@ angular.module('associations.home', [])
           })(association, i);
         }
       });
+  };
+
+  $scope.signout = function() {
+    Auth.signout();
   };
 });

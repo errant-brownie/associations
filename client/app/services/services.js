@@ -89,9 +89,8 @@ angular.module('associations.services', [])
     $window.localStorage.removeItem('com.associations.authenticated');
     return $http({
       method: 'GET',
-      url: '/api/users/signout',
-      data: data
-    })
+      url: '/signOut'
+    });
   };
 
   return {
