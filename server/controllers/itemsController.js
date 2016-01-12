@@ -42,6 +42,22 @@ var getItemsForUsers = function (userIds) {
   })
 }
 
+var removeItemForUser = function (userID, itemName) {
+  return model.Item.findOne({
+    where: {
+      name : itemName,
+    }
+  })
+  .then(function (item) {
+    return model.ItemUser.destroy({
+      where: {
+        item_id: item.id,
+        user_id: userID,
+      }
+    })
+  });
+}
+
 module.exports = {
   getItems: getItems,
   getItemsForUsers: getItemsForUsers,

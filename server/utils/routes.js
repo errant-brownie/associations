@@ -44,6 +44,14 @@ module.exports = function (app, express) {
   //   item: the new items that were created
   app.post('/api/items', auth.ensureLoggedIn('/#/signin'), itemsRequestHandler.add);
 
+  // DELETE /api/items/
+  // inputs:
+  // in data field:
+  //   name: name of the item to remove from this user's like list
+  // outputs:
+  //   none
+  app.delete('/api/items', auth.ensureLoggedIn('/#/signin'), itemsRequestHandler.remove);
+
   // GET /api/associations gets the top items a user might like
   // inputs: 
   // in data field:

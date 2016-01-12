@@ -48,7 +48,15 @@ var add = function (request, response, next) {
   });
 };
 
+var remove = function (request, response, next) {
+  Items.removeItemFromUser(request.user.id, request.data.name)
+  .then(function(){
+    next();
+  });
+}
+
 module.exports = {
   getAll: getAll,
   add: add,
+  remove: remove
 }
