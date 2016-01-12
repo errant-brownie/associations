@@ -31,8 +31,6 @@ angular.module('associations.home', [])
       });
   };
 
-  $scope.dummyData = [{name:"tomato"}, {name:"cake"}, {name:"bed"}, {name:"fruit"}, {name:"swimming"}, {name:"bird"}];
-
   //// Function for displaying the photos of each recommendation
   $scope.renderRecs = function() {
     Items.getAssociations()
