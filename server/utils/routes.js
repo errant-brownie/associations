@@ -15,10 +15,10 @@ module.exports = function (app, express) {
   // output:
   // in data field:
   //    message: if failure, reason for failure
-  app.post('/api/users/signin', auth.authenticate, function(req, res) {
+  app.post('/api/users/signin', auth.authenticate, function (req, res) {
     res.json({ message: "Authenticated" });
   });
-  app.post('/api/users/signup', auth.createUser, function(req, res) {
+  app.post('/api/users/signup', auth.createUser, auth.authenticate, function (req, res) {
     res.json({ message: "Authenticated" });
   });
   app.get('/signOut', auth.signOut);

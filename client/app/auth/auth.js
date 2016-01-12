@@ -11,6 +11,9 @@ angular.module('associations.auth', [])
   $scope.signin = function() {
     Auth.signin($scope.user)
       .then(function (token) {
+        // Should probably save a token, but right now it just
+        // saves the string "Authenticated" because that's what
+        // the server returns
         $window.localStorage.setItem('com.associations.authenticated', token);
         $location.path('/');
       })

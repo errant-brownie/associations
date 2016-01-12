@@ -72,7 +72,10 @@ passport.deserializeUser(function (username, cb) {
   // in data field:
   //    message: if failure, reason for failure
 var createUser = function (req, res, next){
-  var user = req.body.user;
+  var user = {
+    username: req.body.username,
+    password: req.body.password
+  }
 
   // hashing is not done by the model, though it probably should
   Promise.promisify(bcrypt.hash)(user.password,null,null)
@@ -81,13 +84,12 @@ var createUser = function (req, res, next){
     return usersController.addUser(user);
   })
   .then(function (user) {
-    var data = {};
-    data.token = user.id;
-    // sign in the new user
-    passport.authenticate('local', {});
+    // sign in the new user should be the next thing
+    return next();
   })
   .catch(function (error) {
-    res.json(error);
+    console.log (error);
+    return next();
   });
 };
 
