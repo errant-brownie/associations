@@ -40,7 +40,6 @@ angular.module('associations.home', [])
         $scope.associations = [];
 
         var results = resp;
-        console.log(resp);
 
         for(var i = 0; i < results.length; i++) {
           var association = results[i];
