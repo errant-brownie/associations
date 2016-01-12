@@ -133,7 +133,7 @@ angular.module('associations.services', [])
   var removeItem = function(item) {
     return $http({
       method: 'DELETE',
-      url: '/api/items',
+      url: '/api/items/' + item.id,
       data: item
     })
     .then(function(resp) {
