@@ -14,8 +14,10 @@ var Promise = require('bluebird');
 // in data field:
 //   items: list of item objects that the user likes
 var getAll = function (request, response, next){
-  var items = Items.getItemsForUsers([request.user.id]);
-  response.json(items);
+  Items.getItemsForUsers([request.user.id])
+    .then(function(items) {
+      response.json(items);
+    });
 };
 
 // add item to the currently logged in user

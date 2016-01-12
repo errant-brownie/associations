@@ -21,6 +21,17 @@ angular.module('associations.services', [])
     .then(function(resp) {}());
   };
 
+  var getAssociations = function() {
+    return $http({
+      method: 'GET',
+      url: '/api/associations'
+    })
+    .then(function(resp) {
+      console.log('getAssociations response: ', resp);
+      return resp.data;
+    });
+  };
+
   //// This method is for obtaining an image url from the Flickr API
   // The url format is as follows:
   // src = "http://farm"+ item.farm +".static.flickr.com/"+ item.server +"/"+ item.id +"_"+ item.secret +"_m.jpg";
@@ -52,7 +63,8 @@ angular.module('associations.services', [])
 
   return {
     addItems: addItems,
-    getItemImage: getItemImage
+    getItemImage: getItemImage,
+    getAssociations: getAssociations
   };
 })
 
@@ -113,6 +125,7 @@ angular.module('associations.services', [])
       url: '/api/items',
     })
     .then(function(resp){
+      console.log(resp);
       return resp.data;
     });
   };
