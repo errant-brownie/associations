@@ -84,7 +84,7 @@ var getRelatedItems = function (itemList) {
       itemCounts[item].strength = itemCounts[item].count / maxCount;
       results.push(itemCounts[item]);
     }
-
+    
     return results;
   })
 };
